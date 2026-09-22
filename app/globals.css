@@ -1,0 +1,277 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Digital Connect Wave — design tokens
+   Palette derived from the logo: neon blue wireframe on near-black.
+   The page alternates dark and light sections rather than supporting a
+   user-toggled theme, so tokens are absolute rather than theme-relative.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Brand */
+  --color-void: #05070e;
+  --color-surface: #0a0f1c;
+  --color-surface-2: #111828;
+  /*
+   * The logo blue (#0c7bf0) reaches only 4.11:1 against white, so it cannot
+   * carry white button text or small text on a light band. These two are the
+   * accessible working tones; the original brightness lives on in the glow
+   * colours and the WebGL shader, where nothing has to be read.
+   */
+  --color-blue: #0b70e0;
+  --color-blue-ink: #0a5fbf;
+  --color-blue-bright: #2ea8ff;
+  --color-blue-deep: #063c82;
+  --color-spark: #6fe3ff;
+
+  /* Light sections */
+  --color-paper: #ffffff;
+  --color-mist: #f4f7fb;
+  --color-ink: #0b1220;
+  --color-muted: #5a6880;
+  --color-hairline: #e3e9f2;
+
+  /* Type */
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid type ramp */
+  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
+  --text-h1: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
+  --text-h2: clamp(1.75rem, 1.3rem + 2.1vw, 3rem);
+  --text-h3: clamp(1.3rem, 1.1rem + 0.9vw, 1.875rem);
+  --text-lede: clamp(1.0625rem, 1rem + 0.45vw, 1.375rem);
+
+  /* Motion — one scale, used everywhere */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 160ms;
+  --duration-normal: 280ms;
+  --duration-slow: 620ms;
+}
+
+:root {
+  --gutter: 1rem;
+  --shell: 80rem;
+  /* Set by SmoothScroll so CSS can react to scroll depth if needed. */
+  --header-h: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+
+html {
+  /* Lenis drives scrolling; native smooth-scroll would fight it. */
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Nothing on this site should scroll sideways. */
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-blue);
+  color: #fff;
+}
+
+/* Focus rings are never removed — 3px, high contrast, on both themes. */
+:focus-visible {
+  outline: 3px solid var(--color-spark);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ------------------------------------------------------- layout helpers */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(4rem, 2.5rem + 7vw, 8.5rem);
+}
+
+/* Light band on the dark page. */
+.band-light {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.band-mist {
+  background: var(--color-mist);
+  color: var(--color-ink);
+}
+
+.band-dark {
+  background: var(--color-void);
+  color: var(--color-paper);
+}
+
+/* ------------------------------------------------------------ utilities */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Brand gradient text, used sparingly on key figures. */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-spark) 0%,
+    var(--color-blue-bright) 40%,
+    var(--color-blue) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The recurring "mesh field" backdrop, built from the logo's language. */
+.mesh-field {
+  background-image:
+    radial-gradient(60% 50% at 50% 0%, rgb(12 123 240 / 0.22), transparent 70%),
+    radial-gradient(40% 40% at 85% 25%, rgb(111 227 255 / 0.12), transparent 70%);
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Hairline that fades at both ends — used between dark sections. */
+.rule-fade {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(255 255 255 / 0.14) 20%,
+    rgb(255 255 255 / 0.14) 80%,
+    transparent
+  );
+}
+
+/* --------------------------------------------------- reveal primitives */
+
+/*
+ * Elements marked data-reveal are animated in by GSAP.
+ *
+ * Two guards keep this from ever hiding content permanently:
+ *
+ *  1. They are only hidden once `data-js` lands on <html> (set by an inline
+ *     script in the document head, before first paint). Without JavaScript,
+ *     and for crawlers, nothing is hidden at all.
+ *  2. They are only hidden inside a [data-reveal-root], which the <Reveal>
+ *     component sets. A stray data-reveal outside one — in a section that
+ *     forgot its wrapper — simply renders visible instead of disappearing.
+ */
+html[data-js] [data-reveal-root] [data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+html[data-js] [data-reveal-root] [data-reveal].is-in {
+  opacity: 1;
+  will-change: auto;
+}
+
+/*
+ * The hero intro is gated the same way as the scroll reveals: hidden only once
+ * JavaScript has announced itself, before first paint. Without this the hero
+ * paints from the server HTML, then GSAP hides it at hydration to run its
+ * entrance — a visible flash on any slow connection.
+ */
+html[data-js] [data-stage],
+html[data-js] [data-headline] {
+  opacity: 0;
+}
+
+/* ------------------------------------------------------ reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html[data-js] [data-reveal-root] [data-reveal],
+  html[data-js] [data-stage],
+  html[data-js] [data-headline] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ----------------------------------------------------------- marquee */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Each track is one full copy of the list, so -100% is a seamless loop. */
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-rev {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Coverage bars wipe in from their left edge. */
+@keyframes coverage-wipe {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}

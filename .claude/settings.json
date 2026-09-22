@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone *)",
+      "Bash(claude plugin *)",
+      "Read(//c/Users/MSKXYZ/.claude/plugins/marketplaces/claude-design-skillstack/**)",
+      "Read(//c/Users/MSKXYZ/.claude/plugins/marketplaces/claude-design-skillstack/.claude-plugin/**)",
+      "Read(//c/Users/MSKXYZ/.claude/plugins/**)",
+      "Read(//c/Users/MSKXYZ/.claude/plugins/cache/claude-design-skillstack/core-3d-animation/1.0.0/skills/gsap-scrolltrigger/**)",
+      "Read(//c/Users/MSKXYZ/.claude/plugins/cache/claude-design-skillstack/meta-skills/1.0.0/skills/modern-web-design/**)"
+    ]
+  }
+}

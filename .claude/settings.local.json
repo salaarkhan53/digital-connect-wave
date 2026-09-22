@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx -y skills add jezweb/claude-skills --skill motion --agent claude-code)"
+    ]
+  }
+}
