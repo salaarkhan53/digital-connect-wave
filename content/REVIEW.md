@@ -66,7 +66,7 @@ Supply real profile URLs to enable it. Do not link the source companies' account
 
 ## 7. Domain
 
-`content/site.ts` → `site.url` is set to `https://www.digitalconnectwave.net`,
+`content/site.ts` → `site.url` is set to `https://www.digitalconnectwave.com`,
 inferred from the contact email. Confirm before launch — it feeds canonical
 URLs, the sitemap and social share cards.
 
@@ -76,22 +76,24 @@ URLs, the sitemap and social share cards.
 Supply DCW's real comparison baseline, or confirm the estimate is acceptable.
 The assumption is shown on screen, so it is honest either way.
 
-## 9. Careers applications
+## 9. Form delivery (both forms)
 
-Apply buttons open a mailto to `Contact@digitalconnectwave.net` with the role in
-the subject line. Change to an ATS or form endpoint if you have one.
+`/contact` and `/careers/apply` both post to Web3Forms, which forwards them to
+the inbox its access key is registered against. Neither works until the key
+exists.
 
-## 10. Contact form delivery
+**Set `WEB3FORMS_KEY` as a repository secret**, registered against
+`contact@digitalconnectwave.com`. Until then both forms state plainly that they
+are not connected and offer email and phone instead. Neither pretends to
+submit.
 
-`/contact` validates and shows a success state but **does not send anything** —
-the submit handler is a marked TODO. Wire it to Formspree, Resend or an API
-route before launch, or the form silently loses enquiries.
+Free plan limits, enforced in the browser before upload: one attachment, 5 MB.
 
 ---
 
 ## Confirmed — do not change without instruction
 
-- Email `Contact@digitalconnectwave.net`
+- Email `contact@digitalconnectwave.com`
 - Phone `+1 (325) 202-4836`
 - Address 30 N Gould St, Ste R, Sheridan, WY 82801
 - US-market only. No reference to any offshore location anywhere in the site.

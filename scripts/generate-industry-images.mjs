@@ -21,6 +21,7 @@ const bySlug = {
   'Financial Services': 'financial-services',
   'Retail and E-commerce': 'retail-ecommerce',
   Telecom: 'telecom',
+  'Technology Saas': 'technology',
   'Home Services': 'home-services',
 };
 

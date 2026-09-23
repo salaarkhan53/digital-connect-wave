@@ -111,6 +111,7 @@ export const industries: Industry[] = [
       'Trial-to-paid follow-up',
     ],
     capabilities: ['b2b-outreach', 'lead-generation', 'customer-support'],
+    image: '/industries/technology.webp',
   },
   {
     slug: 'home-services',

@@ -6,6 +6,7 @@ import { contact, mailto } from '@/content/contact';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { CTABand } from '@/components/ui/CTABand';
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -85,6 +86,11 @@ export default function CareersPage() {
           </p>
         </Reveal>
       </section>
+
+      <CTABand
+        title="Not the right role?"
+        lede="Send your CV anyway. Campaigns open at short notice and we would rather have you on file than miss you."
+      />
     </>
   );
 }

@@ -1,11 +1,14 @@
 /**
  * The confirmed contact record for Digital Connect Wave.
+ *
+ * The domain is digitalconnectwave.com. An earlier .net address was a
+ * mistake and must not come back.
  * These values are supplied by the company and are the ONLY contact details
  * permitted anywhere in the site.
  */
 export const contact = {
   verified: true,
-  email: 'Contact@digitalconnectwave.net',
+  email: 'contact@digitalconnectwave.com',
   phoneDisplay: '+1 (325) 202-4836',
   phoneHref: 'tel:+13252024836',
   address: {

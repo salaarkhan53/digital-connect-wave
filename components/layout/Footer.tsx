@@ -47,8 +47,13 @@ const cardShell =
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden bg-void">
-      {/* A brand-coloured light travelling along the top edge. */}
+    <footer className="relative isolate overflow-hidden border-t border-white/10 bg-surface/40">
+      {/*
+        A brand-coloured light travelling along the top edge. The footer also
+        carries a border and a slightly lifted background: without them it sat
+        dark-on-dark under any page ending in a dark section, and the boundary
+        disappeared entirely.
+      */}
       <div className="relative h-px w-full overflow-hidden bg-white/10" aria-hidden="true">
         <span className="footer-sweep absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-spark to-transparent" />
       </div>

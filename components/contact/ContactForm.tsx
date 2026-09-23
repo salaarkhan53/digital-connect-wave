@@ -7,7 +7,19 @@ import { capabilities } from '@/content/capabilities';
 import { contact } from '@/content/contact';
 import { ActionButton } from '@/components/ui/Button';
 
-type Status = 'idle' | 'sending' | 'sent';
+/**
+ * Enquiries go through Web3Forms to the same inbox as job applications. The
+ * site is a static export with no server of its own, so a form endpoint is the
+ * only way an enquiry actually reaches anyone.
+ *
+ * The access key is a public identifier by design and is shared with the
+ * careers form; it is registered against the destination address, not against
+ * a particular form.
+ */
+const ENDPOINT = 'https://api.web3forms.com/submit';
+const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '';
+
+type Status = 'idle' | 'sending' | 'sent' | 'failed';
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>;
 
 const field =
@@ -19,6 +31,7 @@ export function ContactForm() {
   const params = useSearchParams();
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Errors>({});
+  const [failure, setFailure] = useState('');
 
   /**
    * The savings calculator links here with its inputs attached, so the enquiry
@@ -77,13 +90,53 @@ export function ContactForm() {
       return;
     }
 
-    setStatus('sending');
+    data.set('subject', `Enquiry: ${data.get('service') || 'General'} - ${name}`);
 
-    // TODO(delivery): no backend is wired up yet. Point this at an API route,
-    // Formspree or Resend before launch — until then the form validates and
-    // confirms but does not actually send. See content/REVIEW.md item 10.
-    await new Promise((r) => setTimeout(r, 700));
-    setStatus('sent');
+    setStatus('sending');
+    setFailure('');
+
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', body: data });
+      const json = (await res.json()) as { message?: string };
+      if (!res.ok) throw new Error(json.message || `Could not send (${res.status}).`);
+      setStatus('sent');
+    } catch (err) {
+      setStatus('failed');
+      setFailure(
+        err instanceof Error ? err.message : 'Something went wrong sending that.',
+      );
+    }
+  }
+
+  // Without a key the form cannot deliver, so it says so rather than taking an
+  // enquiry into a void. See README, "Careers applications", for the setup.
+  if (!ACCESS_KEY) {
+    return (
+      <div className="rounded-2xl border border-amber-400/40 bg-amber-50 p-8">
+        <h2 className="font-display text-xl font-medium text-ink">
+          The form is not connected yet
+        </h2>
+        <p className="body-justify mt-3 leading-relaxed text-muted">
+          This form needs a Web3Forms access key before it can deliver anything,
+          and it will not pretend to submit without one. In the meantime, email
+          or call and you will reach the same people.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${contact.email}`}
+            className="inline-flex min-h-[44px] items-center rounded-full bg-blue px-6 py-3 text-sm font-medium text-white"
+          >
+            Email {contact.email}
+          </a>
+          <a
+            href={contact.phoneHref}
+            className="inline-flex min-h-[44px] items-center rounded-full border border-[color:var(--color-hairline)] px-6 py-3 text-sm font-medium text-ink"
+          >
+            {contact.phoneDisplay}
+          </a>
+        </div>
+      </div>
+    );
   }
 
   if (status === 'sent') {
@@ -117,6 +170,18 @@ export function ContactForm() {
       noValidate
       className="rounded-2xl border border-[color:var(--color-hairline)] bg-white p-6 sm:p-8"
     >
+      <input type="hidden" name="access_key" value={ACCESS_KEY} />
+      <input type="hidden" name="from_name" value="Digital Connect Wave website" />
+      {/* Honeypot. Hidden from people, filled in by bots. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        style={{ display: 'none' }}
+      />
+
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Your name" name="name" error={errors.name} required>
           <input id="name" name="name" type="text" autoComplete="name" className={field} />
@@ -166,6 +231,15 @@ export function ContactForm() {
           />
         </Field>
       </div>
+
+      {status === 'failed' && (
+        <p
+          className="mt-6 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+          role="alert"
+        >
+          {failure} You can also email {contact.email} directly.
+        </p>
+      )}
 
       <div className="mt-7 flex flex-wrap items-center gap-4">
         <ActionButton type="submit" disabled={status === 'sending'}>

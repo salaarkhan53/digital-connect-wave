@@ -28,7 +28,7 @@ Three rules are baked into the content and must stay that way:
 1. **US market only.** No reference to any offshore location anywhere — not in
    copy, metadata, alt text or structured data. The source material this content
    came from was offshore-framed; that framing was stripped, not softened.
-2. **One contact record.** `Contact@digitalconnectwave.net`, `+1 (325) 202-4836`,
+2. **One contact record.** `contact@digitalconnectwave.com`, `+1 (325) 202-4836`,
    30 N Gould St Ste R, Sheridan, WY 82801. It lives in `content/contact.ts` and
    feeds the header, footer, contact page and JSON-LD. Nothing else is permitted.
 3. **Careers roles are titles only.** No location, responsibilities, requirements
@@ -178,24 +178,28 @@ source location with `DCW_LOGO_DIR`.
 
 ---
 
-## Careers applications
+## Form delivery
 
-`/careers/apply` collects the application and posts it, CV attached, to
-Web3Forms, which forwards it to the inbox its access key is registered
-against. The site is a static export with no server of its own, so the
-alternative would be no attachment at all: a `mailto:` link cannot carry a
-file.
+Both forms post to Web3Forms, which forwards them to the inbox its access key
+is registered against:
+
+- `/contact` sends enquiries.
+- `/careers/apply` sends the application with the CV attached.
+
+The site is a static export with no server of its own, so a form endpoint is
+the only way either reaches anyone. A `mailto:` link cannot carry a file at
+all.
 
 **To turn it on:**
 
-1. Enter `Contact@digitalconnectwave.net` at <https://web3forms.com>. They email
+1. Enter `contact@digitalconnectwave.com` at <https://web3forms.com>. They email
    an access key back. No account is required.
 2. Add it to this repo as a secret named `WEB3FORMS_KEY`
    (Settings, Secrets and variables, Actions).
 3. Re-run the Pages workflow.
 
-Until that secret exists the form says so plainly and offers email instead. It
-never pretends to submit.
+Until that secret exists both forms say so plainly and offer email and phone
+instead. Neither pretends to submit.
 
 The key is a public identifier by design, which is why it travels as
 `NEXT_PUBLIC_`. It grants nothing beyond sending mail to the address it is
