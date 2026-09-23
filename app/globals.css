@@ -391,3 +391,25 @@ html[data-js] [data-headline] {
     animation: none;
   }
 }
+
+/*
+ * Justified body prose.
+ *
+ * Applied to the descriptive paragraphs in each section, not to labels,
+ * figures or anything centred. Justification only stretches lines that are
+ * not the last in a block, so a single-line paragraph is untouched and only
+ * genuinely multi-line copy is affected. `hyphens` keeps the word spacing
+ * even instead of opening rivers down a narrow column.
+ */
+.body-justify {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Below this the columns are too narrow to justify without visible gaps. */
+@media (max-width: 480px) {
+  .body-justify {
+    text-align: left;
+    hyphens: manual;
+  }
+}

@@ -55,8 +55,8 @@ export function SectionHeading({
         <p
           data-reveal
           className={`mt-5 text-[length:var(--text-lede)] leading-relaxed ${
-            dark ? 'text-white/55' : 'text-muted'
-          }`}
+            align === 'center' ? '' : 'body-justify'
+          } ${dark ? 'text-white/55' : 'text-muted'}`}
         >
           {lede}
         </p>

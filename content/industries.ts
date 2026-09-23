@@ -13,6 +13,7 @@ export const industries: Industry[] = [
       'Consistent quality across high-volume campaigns',
     ],
     capabilities: ['sales-verification', 'lead-generation', 'inbound-support'],
+    image: '/industries/insurance.webp',
   },
   {
     slug: 'medicare',
@@ -26,6 +27,7 @@ export const industries: Industry[] = [
       'Documented consent on every contact',
     ],
     capabilities: ['lead-generation', 'sales-verification', 'outbound-campaigns'],
+    image: '/industries/medicare.webp',
   },
   {
     slug: 'final-expense',
@@ -39,6 +41,7 @@ export const industries: Industry[] = [
       'Keeping closers on closing, not prospecting',
     ],
     capabilities: ['lead-generation', 'sales-verification', 'outbound-campaigns'],
+    image: '/industries/final-expense.webp',
   },
   {
     slug: 'healthcare',
@@ -52,6 +55,7 @@ export const industries: Industry[] = [
       'Records accuracy across systems',
     ],
     capabilities: ['medical-billing', 'customer-support', 'inbound-support'],
+    image: '/industries/healthcare.webp',
   },
   {
     slug: 'financial-services',
@@ -65,6 +69,7 @@ export const industries: Industry[] = [
       'Auditable records of every interaction',
     ],
     capabilities: ['sales-verification', 'customer-support', 'b2b-outreach'],
+    image: '/industries/financial-services.webp',
   },
   {
     slug: 'retail-ecommerce',
@@ -78,6 +83,7 @@ export const industries: Industry[] = [
       'Multi-channel coverage',
     ],
     capabilities: ['customer-support', 'inbound-support', 'digital-marketing'],
+    image: '/industries/retail-ecommerce.webp',
   },
   {
     slug: 'telecom',
@@ -91,6 +97,7 @@ export const industries: Industry[] = [
       'Consistent handling across a large agent pool',
     ],
     capabilities: ['outbound-campaigns', 'customer-support', 'inbound-support'],
+    image: '/industries/telecom.webp',
   },
   {
     slug: 'technology',
@@ -117,6 +124,7 @@ export const industries: Industry[] = [
       'Estimate follow-up and reactivation',
     ],
     capabilities: ['inbound-support', 'outbound-campaigns', 'lead-generation'],
+    image: '/industries/home-services.webp',
   },
 ];
 

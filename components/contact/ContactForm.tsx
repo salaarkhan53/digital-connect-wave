@@ -98,7 +98,7 @@ export function ContactForm() {
         >
           <Check className="size-6" strokeWidth={2.5} />
         </span>
-        <h2 className="mt-5 font-display text-xl font-medium text-ink">Thanks — that is with us.</h2>
+        <h2 className="mt-5 font-display text-xl font-medium text-ink">Thanks, that is with us.</h2>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
           We answer business enquiries within one working day. If it is urgent,
           call{' '}
@@ -154,7 +154,7 @@ export function ContactForm() {
           name="message"
           error={errors.message}
           required
-          hint="Volume, hours, the standard you are held to — whatever you already know."
+          hint="Volume, hours, the standard you are held to: whatever you already know."
         >
           <textarea
             id="message"

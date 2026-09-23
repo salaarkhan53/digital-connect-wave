@@ -121,7 +121,7 @@ export function Footer() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_2fr] lg:gap-14">
           <div data-reveal>
             <Wordmark />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/50 body-justify">
               Contact operations for US brands, built on documented process and
               recorded QA.
             </p>

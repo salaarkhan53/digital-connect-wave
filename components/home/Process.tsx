@@ -90,7 +90,7 @@ export function Process() {
                 </span>
                 <span className="font-display text-lg font-medium text-ink">{step.title}</span>
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{step.detail}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted body-justify">{step.detail}</p>
             </li>
           ))}
         </ol>
@@ -142,7 +142,7 @@ export function Process() {
                     >
                       {step.title}
                     </button>
-                    <p className="max-w-xs text-sm leading-relaxed text-muted">{step.summary}</p>
+                    <p className="max-w-xs text-sm leading-relaxed text-muted body-justify">{step.summary}</p>
                   </li>
                 );
               })}
@@ -167,7 +167,7 @@ export function Process() {
                   <h3 className="mt-4 text-[length:var(--text-h3)] font-semibold text-ink">
                     {step.title}
                   </h3>
-                  <p className="mt-4 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-muted">
+                  <p className="mt-4 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-muted body-justify">
                     {step.detail}
                   </p>
                 </div>

@@ -42,7 +42,7 @@ export function Measured() {
               <h3 className="mt-4 font-display text-xl font-medium text-white">
                 {kpi.label}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/50">{kpi.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/50 body-justify">{kpi.body}</p>
 
               <span
                 className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-blue to-spark transition-transform duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"

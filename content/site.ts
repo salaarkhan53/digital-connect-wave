@@ -40,7 +40,7 @@ export const nav: NavItem[] = [
     featured: {
       label: 'How we work',
       href: '/about#process',
-      blurb: 'Discover, Build, Train, Launch, Optimize — the five steps every campaign runs through.',
+      blurb: 'Discover, Build, Train, Launch, Optimize: the five steps every campaign runs through.',
     },
   },
   {

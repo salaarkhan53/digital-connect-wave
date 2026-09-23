@@ -30,7 +30,7 @@ export default function CareersPage() {
             {careersIntro.points.map((point) => (
               <li key={point.title} data-reveal>
                 <h3 className="font-display text-lg font-medium text-ink">{point.title}</h3>
-                <p className="mt-2.5 leading-relaxed text-muted">{point.body}</p>
+                <p className="mt-2.5 leading-relaxed text-muted body-justify">{point.body}</p>
               </li>
             ))}
           </ul>
@@ -51,7 +51,7 @@ export default function CareersPage() {
             {roles.map((role) => (
               <li key={role.slug}>
                 <a
-                  href={mailto(`Application — ${role.title}`)}
+                  href={mailto(`Application: ${role.title}`)}
                   className="group flex items-center justify-between gap-6 border-b border-white/10 py-6 transition-colors duration-[280ms] hover:border-white/25"
                   data-reveal
                 >

@@ -21,7 +21,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About"
         title="We run the calls your brand is judged on."
-        lede="Which is why the boring parts — documented process, recorded QA, named ownership — are the parts we talk about first."
+        lede="Which is why we lead with the boring parts: documented process, recorded QA and named ownership."
       />
 
       {/* ----------------------------------------------- mission / vision */}
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 className="mt-4 text-[length:var(--text-h3)] font-semibold leading-tight text-ink"
               >
                 To be the contact partner US businesses recommend without being
-                asked to — and the employer people stay at.
+                asked, and the employer people stay at.
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function AboutPage() {
                 <h3 className="mt-3 font-display text-base font-medium text-white">
                   {entry.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/50">{entry.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/50 body-justify">{entry.body}</p>
               </li>
             ))}
           </ol>
@@ -129,7 +129,7 @@ export default function AboutPage() {
                   {i + 1}
                 </span>
                 <h3 className="mt-4 font-display text-base font-medium text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.detail}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{step.detail}</p>
               </li>
             ))}
           </ol>
@@ -154,7 +154,7 @@ export default function AboutPage() {
                 <h3 className="mt-3 font-display text-lg font-medium text-ink">
                   {principle.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted">{principle.body}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted body-justify">{principle.body}</p>
               </li>
             ))}
           </ol>

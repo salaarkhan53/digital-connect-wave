@@ -76,10 +76,25 @@ white button text or small text on a light band. Two working tones exist:
 The original brightness survives in `--color-blue-bright`, `--color-spark` and
 the WebGL shader, where nothing has to be read.
 
-**No photography.** Industries, capabilities and careers are illustrated with
-generated brand art (`components/art/MeshPanel.tsx`) — gradient fields and
-contour lines from the logo's own language. Nothing can look like a stock
-placeholder, and the payload stays small.
+**Photography** is used for the industry verticals only. `components/art/
+IndustryVisual.tsx` renders the supplied photo where one exists and falls back
+to generated brand art (`MeshPanel.tsx`) where it does not, so a vertical
+without a photo degrades to something deliberate rather than leaving a hole.
+Technology & SaaS is currently the only one without.
+
+Everything else (capabilities, careers, the mega-menu tile) stays on generated
+art: gradient fields and contour lines from the logo's own language.
+
+Run `node scripts/generate-industry-images.mjs` to re-derive the optimized
+industry photos from their sources.
+
+**No em dashes in any rendered copy.** Use a colon, a comma or a full stop.
+`npm run build` then grep `out/**/*.html` for the character to confirm.
+
+**Body prose is justified.** The `.body-justify` utility carries it, applied to
+the descriptive paragraph in each section and never to labels, figures or
+centred text. It reverts to left-aligned below 480px, where the column is too
+narrow to justify without visible gaps.
 
 ---
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { industries } from '@/content/industries';
-import { MeshPanel } from '@/components/art/MeshPanel';
+import { IndustryVisual } from '@/components/art/IndustryVisual';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTABand } from '@/components/ui/CTABand';
@@ -31,11 +31,11 @@ export default function IndustriesPage() {
                   href={`/industries/${industry.slug}`}
                   className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void transition-[border-color,transform,box-shadow] duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-blue/50 hover:shadow-[0_24px_50px_-28px_rgb(12_123_240/0.6)]"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <MeshPanel seed={i} className="absolute inset-0" />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent"
-                      aria-hidden="true"
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <IndustryVisual
+                      industry={industry}
+                      index={i}
+                      sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
                     />
                   </div>
 
@@ -43,7 +43,7 @@ export default function IndustriesPage() {
                     <h2 className="font-display text-lg font-medium text-white">
                       {industry.title}
                     </h2>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/50">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/50 body-justify">
                       {industry.summary}
                     </p>
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-spark">

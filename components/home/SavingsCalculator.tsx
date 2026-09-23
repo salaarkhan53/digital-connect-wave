@@ -75,7 +75,7 @@ export function SavingsCalculator() {
         <SectionHeading
           eyebrow="Estimate"
           title={<span id="savings-heading">What does the desk actually cost you?</span>}
-          lede="Put your own numbers in. Nothing is sent anywhere, and nothing here is a quote — it is arithmetic you can check."
+          lede="Put your own numbers in. Nothing is sent anywhere, and nothing here is a quote. It is arithmetic you can check."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start">
@@ -127,12 +127,12 @@ export function SavingsCalculator() {
               })}
             </div>
 
-            <p className="mt-8 flex items-start gap-2.5 rounded-xl bg-mist p-4 text-xs leading-relaxed text-muted">
+            <p className="mt-8 flex items-start gap-2.5 rounded-xl bg-mist p-4 text-xs leading-relaxed text-muted body-justify">
               <Info className="mt-0.5 size-4 shrink-0 text-blue-ink" strokeWidth={1.5} aria-hidden="true" />
               <span>
                 Assumes 52 staffed weeks a year and a like-for-like comparison of
-                staffed hours. Defaults are US market estimates, not our rates —
-                change them to whatever your own figures are. This is an estimate,
+                staffed hours. Defaults are US market estimates, not our rates. Change
+                them to whatever your own figures are. This is an estimate,
                 not a quote.
               </span>
             </p>

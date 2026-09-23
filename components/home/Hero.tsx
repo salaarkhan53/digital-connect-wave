@@ -103,7 +103,7 @@ export function Hero() {
           </h1>
 
           <p data-stage className="mt-5 max-w-xl text-[length:var(--text-lede)] text-white/60">
-            We run the contact operations behind US brands — inbound support,
+            We run the contact operations behind US brands: inbound support,
             outbound campaigns, qualified pipeline and compliance-led
             verification, built on documented process and recorded QA.
           </p>

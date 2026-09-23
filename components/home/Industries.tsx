@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { industries } from '@/content/industries';
-import { MeshPanel } from '@/components/art/MeshPanel';
+import { IndustryVisual } from '@/components/art/IndustryVisual';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
@@ -57,7 +57,7 @@ export function Industries() {
                         aria-hidden="true"
                       />
                     </span>
-                    <span className="mt-1 block max-w-xl text-sm leading-relaxed text-white/55">
+                    <span className="mt-1 block max-w-xl text-sm leading-relaxed text-white/55 body-justify">
                       {industry.summary}
                     </span>
                   </span>
@@ -78,7 +78,7 @@ export function Industries() {
                 className="absolute inset-0 transition-opacity duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
                 style={{ opacity: active === i ? 1 : 0 }}
               >
-                <MeshPanel seed={i} className="absolute inset-0" />
+                <IndustryVisual industry={industry} index={i} />
               </div>
             ))}
 
@@ -86,7 +86,7 @@ export function Industries() {
               <p className="font-display text-xl font-medium text-white">
                 {industries[active].title}
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/60">
+              <p className="mt-2 text-sm leading-relaxed text-white/60 body-justify">
                 {industries[active].summary}
               </p>
             </div>

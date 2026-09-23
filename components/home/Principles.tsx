@@ -24,7 +24,7 @@ export function Principles() {
               <h3 className="mt-3 font-display text-lg font-medium text-ink">
                 {principle.title}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted">{principle.body}</p>
+              <p className="mt-2.5 text-sm leading-relaxed text-muted body-justify">{principle.body}</p>
             </li>
           ))}
         </ol>

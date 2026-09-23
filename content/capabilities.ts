@@ -86,7 +86,7 @@ export const capabilities: Capability[] = [
     promise: 'Back-office billing capacity handled by teams trained on healthcare workflows.',
     forWho: 'Healthcare providers and billing companies that need added processing capacity.',
     body:
-      'Billing backlogs are a cash-flow problem long before they become an admin problem. We add trained capacity to the parts of the cycle that stall — eligibility checks, claim follow-up, records accuracy — so ageing claims keep moving while your own team handles the exceptions.',
+      'Billing backlogs are a cash-flow problem long before they become an admin problem. We add trained capacity to the parts of the cycle that stall, such as eligibility checks, claim follow-up and records accuracy, so ageing claims keep moving while your own team handles the exceptions.',
     features: [
       'Claims processing support',
       'Eligibility and benefits verification',

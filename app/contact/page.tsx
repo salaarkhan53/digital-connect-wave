@@ -78,7 +78,7 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <p className="font-display text-base font-medium text-ink">Headquarters</p>
-                  <address className="mt-1 text-sm not-italic leading-relaxed text-muted">
+                  <address className="mt-1 text-sm not-italic leading-relaxed text-muted body-justify">
                     {contact.addressLines.map((line) => (
                       <span key={line} className="block">
                         {line}

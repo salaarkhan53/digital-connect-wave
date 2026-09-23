@@ -58,7 +58,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
 
               <p
                 data-reveal
-                className="mt-6 text-[length:var(--text-lede)] leading-relaxed text-ink"
+                className="mt-6 text-[length:var(--text-lede)] leading-relaxed text-ink body-justify"
               >
                 {cap.body}
               </p>
@@ -68,7 +68,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
                 className="mt-8 rounded-2xl border border-[color:var(--color-hairline)] bg-mist p-6"
               >
                 <h2 className="font-display text-sm font-medium text-ink">Who it is for</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{cap.forWho}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{cap.forWho}</p>
               </div>
             </div>
 
@@ -117,7 +117,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
                   {i + 1}
                 </span>
                 <h3 className="mt-4 font-display text-base font-medium text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.summary}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{step.summary}</p>
               </li>
             ))}
           </ol>
@@ -141,7 +141,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
                     className="group flex h-full flex-col rounded-2xl border border-[color:var(--color-hairline)] bg-white p-6 transition-[border-color,transform] duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-blue/45"
                   >
                     <h3 className="font-display text-lg font-medium text-ink">{industry.title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted body-justify">
                       {industry.summary}
                     </p>
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-blue-ink">

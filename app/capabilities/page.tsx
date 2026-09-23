@@ -61,7 +61,7 @@ export default function CapabilitiesPage() {
                   data-reveal
                   className="font-display text-xs font-medium uppercase tracking-[0.18em] text-blue-ink"
                 >
-                  {String(i + 1).padStart(2, '0')} — Capability
+                  {String(i + 1).padStart(2, '0')} / Capability
                 </p>
                 <h2
                   id={`${cap.slug}-heading`}
@@ -72,7 +72,7 @@ export default function CapabilitiesPage() {
                 </h2>
                 <p
                   data-reveal
-                  className="mt-5 text-[length:var(--text-lede)] leading-relaxed text-muted"
+                  className="mt-5 text-[length:var(--text-lede)] leading-relaxed text-muted body-justify"
                 >
                   {cap.body}
                 </p>

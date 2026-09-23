@@ -43,6 +43,12 @@ export type Industry = {
   challenges: string[];
   /** Capability slugs most relevant to this vertical. */
   capabilities: string[];
+  /**
+   * Path under public/ for this vertical's photography, or undefined when none
+   * has been supplied. Anything without one falls back to generated brand art,
+   * so a missing photo degrades rather than leaving a hole.
+   */
+  image?: string;
 };
 
 export type ProcessStep = {

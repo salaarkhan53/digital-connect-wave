@@ -42,7 +42,7 @@ export default function CompliancePage() {
                   </span>
                 </div>
                 <h2 className="mt-5 font-display text-xl font-medium text-ink">{item.title}</h2>
-                <p className="mt-3 leading-relaxed text-muted">{item.body}</p>
+                <p className="mt-3 leading-relaxed text-muted body-justify">{item.body}</p>
               </li>
             ))}
           </ul>
@@ -66,7 +66,7 @@ export default function CompliancePage() {
                 className="rounded-2xl border border-[color:var(--color-hairline)] bg-white p-6"
               >
                 <h3 className="font-display text-base font-medium text-ink">{kpi.label}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{kpi.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{kpi.body}</p>
               </li>
             ))}
           </ul>
@@ -85,9 +85,9 @@ export default function CompliancePage() {
             </h2>
             <p className="mt-4 leading-relaxed text-white/55">
               Everything above describes how we work, not a certificate hanging on
-              a wall. If your procurement process needs a formal attestation —
-              HIPAA, SOC 2, PCI DSS — ask us directly and we will tell you plainly
-              what we hold and what we do not. We would rather lose a deal than
+              a wall. If your procurement process needs a formal attestation such as
+              HIPAA, SOC 2 or PCI DSS, ask us directly and we will tell you
+              plainly what we hold and what we do not. We would rather lose a deal than
               imply something we cannot evidence.
             </p>
           </div>

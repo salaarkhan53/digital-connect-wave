@@ -65,7 +65,7 @@ export function PageHero({
         {lede && (
           <p
             data-reveal
-            className="mt-6 max-w-2xl text-[length:var(--text-lede)] leading-relaxed text-white/55"
+            className="mt-6 max-w-2xl text-[length:var(--text-lede)] leading-relaxed text-white/55 body-justify"
           >
             {lede}
           </p>

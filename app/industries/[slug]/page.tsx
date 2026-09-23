@@ -6,7 +6,7 @@ import { industries, industryBySlug } from '@/content/industries';
 import { capabilityBySlug } from '@/content/capabilities';
 import { complianceItems } from '@/content/compliance';
 import { Icon } from '@/components/ui/Icon';
-import { MeshPanel } from '@/components/art/MeshPanel';
+import { IndustryVisual } from '@/components/art/IndustryVisual';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -53,7 +53,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
             <div>
               <p
                 data-reveal
-                className="text-[length:var(--text-lede)] leading-relaxed text-ink"
+                className="text-[length:var(--text-lede)] leading-relaxed text-ink body-justify"
               >
                 {industry.body}
               </p>
@@ -77,10 +77,15 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
 
             <div
               data-reveal
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void lg:self-start"
+              className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void lg:self-start"
               aria-hidden="true"
             >
-              <MeshPanel seed={index} className="absolute inset-0" />
+              <IndustryVisual
+                industry={industry}
+                index={index}
+                sizes="(min-width: 1024px) 28rem, 90vw"
+                priority
+              />
             </div>
           </div>
         </Reveal>
@@ -108,7 +113,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
                     <Icon name={cap.icon} className="size-4.5" />
                   </span>
                   <h3 className="mt-4 font-display text-base font-medium text-ink">{cap.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{cap.promise}</p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted body-justify">{cap.promise}</p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-blue-ink">
                     Explore
                     <ArrowUpRight
@@ -145,7 +150,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
                 </span>
                 <div>
                   <h3 className="font-display text-base font-medium text-white">{item.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/50">{item.body}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/50 body-justify">{item.body}</p>
                 </div>
               </li>
             ))}
