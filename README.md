@@ -85,9 +85,18 @@ Technology & SaaS is currently the only one without.
 Everything else (capabilities, careers, the mega-menu tile) stays on generated
 art: gradient fields and contour lines from the logo's own language.
 
-Run `node scripts/generate-industry-images.mjs` to re-derive the optimized
-industry photos from their sources, and `npm run brand:assets` for the symbol
-and the closing call-to-action backdrop.
+Re-derive the optimized imagery with `npm run industry:images`,
+`npm run process:images` and `npm run brand:assets`.
+
+The "How we work" illustrations are transparent PNGs, so their alpha is
+preserved and they use `object-contain`: there is no visible box around them on
+the white panel, and no letterbox either.
+
+That section renders two ways. The pinned scene needs width **and** height, so
+the CSS and the GSAP `matchMedia` gate are deliberately identical at
+`min-width: 1024px and min-height: 820px`. Anything shorter gets the stacked
+list, which scrolls, rather than a pinned panel with its bottom cut off. If you
+change one gate, change the other.
 
 **No em dashes in any rendered copy.** Use a colon, a comma or a full stop.
 `npm run build` then grep `out/**/*.html` for the character to confirm.

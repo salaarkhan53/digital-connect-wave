@@ -1,10 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { process } from '@/content/process';
 import { gsap, useGSAP } from '@/lib/gsap';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
+import { asset } from '@/lib/asset';
 
 /**
  * The delivery model.
@@ -28,7 +30,7 @@ export function Process() {
       // Height matters as much as width: pinning a scene taller than the
       // viewport crops it, so short windows keep the plain scrolling layout.
       mm.add(
-        '(min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)',
+        '(min-width: 1024px) and (min-height: 820px) and (prefers-reduced-motion: no-preference)',
         () => {
           const el = root.current;
           if (!el) return;
@@ -67,12 +69,12 @@ export function Process() {
   );
 
   return (
-    <section className="band-mist" aria-labelledby="process-heading" id="process">
+    <section className="band-mist" aria-label="How we work" id="process">
       {/* ------------------------------------------------ mobile / tablet */}
-      <Reveal className="shell section lg:hidden">
+      <Reveal className="shell section [@media(min-width:1024px)_and_(min-height:820px)]:hidden">
         <SectionHeading
           eyebrow="How we work"
-          title={<span id="process-heading">Five steps, every campaign, no exceptions.</span>}
+          title="Five steps, every campaign, no exceptions."
           lede="The order matters. Most failed campaigns skipped step one and discovered it at step four."
         />
 
@@ -93,14 +95,29 @@ export function Process() {
                 <span className="font-display text-lg font-medium text-ink">{step.title}</span>
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted body-justify">{step.detail}</p>
+
+              {step.image && (
+                /* A fixed height, not an aspect ratio: this list also runs on
+                   a wide-but-short desktop, where 3:2 made the illustration
+                   taller than the card it sat in. */
+                <div className="relative mt-4 h-44 sm:h-52">
+                  <Image
+                    src={asset(step.image)}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 0px, 90vw"
+                    className="object-contain object-center"
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ol>
       </Reveal>
 
       {/* ------------------------------------------------------- desktop */}
-      <div ref={root} className="hidden lg:block">
-        <div className="shell py-16">
+      <div ref={root} className="hidden [@media(min-width:1024px)_and_(min-height:820px)]:block">
+        <div className="shell py-12">
           <SectionHeading
             eyebrow="How we work"
             title="Five steps, every campaign, no exceptions."
@@ -122,7 +139,7 @@ export function Process() {
               {process.map((step, i) => {
                 const reached = i <= active;
                 return (
-                  <li key={step.id} className="relative pb-6 pl-11">
+                  <li key={step.id} className="relative pb-5 pl-11">
                     <span
                       className={`absolute left-0 top-0.5 flex size-8 items-center justify-center rounded-full border text-xs font-medium tabular-nums transition-colors duration-[280ms] ${
                         reached
@@ -154,7 +171,7 @@ export function Process() {
               {process.map((step, i) => (
                 <div
                   key={step.id}
-                  className="absolute inset-0 p-10 transition-opacity duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
+                  className="absolute inset-0 flex flex-col p-8 transition-opacity duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
                   style={{
                     opacity: active === i ? 1 : 0,
                     pointerEvents: active === i ? 'auto' : 'none',
@@ -166,12 +183,31 @@ export function Process() {
                   <p className="font-display text-xs font-medium uppercase tracking-[0.18em] text-blue-ink">
                     Step {i + 1}
                   </p>
-                  <h3 className="mt-4 text-[length:var(--text-h3)] font-semibold text-ink">
+                  <h3 className="mt-3 text-[length:var(--text-h3)] font-semibold text-ink">
                     {step.title}
                   </h3>
-                  <p className="mt-4 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-muted body-justify">
+                  {/* Full panel measure, so the detail settles on two lines. */}
+                  <p className="mt-3 text-[length:var(--text-lede)] leading-relaxed text-muted body-justify">
                     {step.detail}
                   </p>
+
+                  {step.image && (
+                    /*
+                       The illustrations are cut-out PNGs, so `contain` leaves no
+                       visible letterbox against the white panel, and the art can
+                       take whatever height the pinned scene has left without
+                       being cropped.
+                    */
+                    <div className="relative mt-5 min-h-0 flex-1">
+                      <Image
+                        src={asset(step.image)}
+                        alt=""
+                        fill
+                        sizes="(min-width: 1024px) 48rem, 0px"
+                        className="object-contain object-center"
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

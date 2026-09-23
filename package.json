@@ -12,7 +12,9 @@
     "qa:tour": "node scripts/tour.cjs",
     "qa:motion": "node scripts/rm-check.cjs",
     "typecheck": "tsc --noEmit",
-    "qa:spacing": "node scripts/spacing.cjs"
+    "qa:spacing": "node scripts/spacing.cjs",
+    "process:images": "node scripts/generate-process-images.mjs",
+    "industry:images": "node scripts/generate-industry-images.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

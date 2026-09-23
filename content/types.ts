@@ -56,6 +56,8 @@ export type ProcessStep = {
   title: string;
   summary: string;
   detail: string;
+  /** Path under public/ for this step's illustration. */
+  image?: string;
 };
 
 export type Principle = {
