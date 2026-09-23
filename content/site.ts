@@ -24,7 +24,7 @@ export type NavItem = {
   href: string;
   /** Renders as a mega-menu panel when present. */
   children?: NavChild[];
-  featured?: { label: string; href: string; blurb: string };
+  featured?: { label: string; href: string; blurb: string; image?: string };
 };
 
 export const nav: NavItem[] = [
@@ -40,6 +40,7 @@ export const nav: NavItem[] = [
       label: 'How we work',
       href: '/about#process',
       blurb: 'Discover, Build, Train, Launch, Optimize: the five steps every campaign runs through.',
+      image: '/menu/how-we-work.webp',
     },
   },
   {
@@ -54,21 +55,15 @@ export const nav: NavItem[] = [
       label: 'Compliance',
       href: '/compliance',
       blurb: 'How QA monitoring, script adherence and audit trails actually work here.',
+      image: '/menu/compliance.webp',
     },
   },
-  {
-    label: 'Company',
-    href: '/about',
-    children: [
-      { label: 'About', href: '/about', blurb: 'Who we are and what we hold ourselves to.' },
-      { label: 'Compliance', href: '/compliance', blurb: 'Process, monitoring and audit trail.' },
-    ],
-    /*
-     * No featured tile. The panel drops to a single column and a narrower box
-     * when one is absent, so About and Compliance sit together rather than
-     * leaving half of a 56rem panel empty.
-     */
-  },
+  /*
+   * A plain link to About rather than a panel. Two items did not justify a
+   * mega-menu, and Compliance is already the featured tile on the Industries
+   * panel, so nothing is lost by dropping the list.
+   */
+  { label: 'Company', href: '/about' },
   /*
    * Careers rather than Contact. Contact and the "Let's talk" button landed on
    * the same page, so one of the five slots was spent twice; Careers had no

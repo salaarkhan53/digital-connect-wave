@@ -179,7 +179,7 @@ export function Header() {
                           href={item.featured.href}
                           className="group relative flex min-h-[15rem] flex-col justify-end overflow-hidden rounded-xl border border-white/10 bg-surface p-5 transition-colors duration-[280ms] hover:border-spark/45"
                         >
-                          <MenuArt seed={navIndex} />
+                          <MenuArt seed={navIndex} image={item.featured.image} />
 
                           <span className="relative flex items-center gap-1.5 font-display text-lg text-white">
                             {item.featured.label}
