@@ -12,7 +12,20 @@ export const roles: Role[] = [
   { slug: 'final-expense-closer', title: 'Final Expense Closer' },
 ];
 
-/** Why-join copy for the careers page. Culture only — no location claims. */
+/** Experience bands offered on the application form. */
+export const experienceLevels = [
+  'Fresh',
+  '1 Year',
+  '2 Years',
+  '3 Years',
+  '4+ Years',
+] as const;
+
+export type ExperienceLevel = (typeof experienceLevels)[number];
+
+export const roleBySlug = (slug: string) => roles.find((r) => r.slug === slug);
+
+/** Why-join copy for the careers page. Culture only, no location claims. */
 export const careersIntro = {
   heading: 'Together we build success',
   lede:

@@ -40,6 +40,11 @@ jobs:
           # point at Pages rather than claiming to be the production domain.
           NEXT_PUBLIC_PREVIEW: 'true'
           NEXT_PUBLIC_SITE_URL: https://salaarkhan53.github.io/digital-connect-wave
+          # Web3Forms access key for the careers application form. Set it as a
+          # repository secret named WEB3FORMS_KEY. Until it exists the form says
+          # so plainly rather than pretending to submit. The key is a public
+          # identifier by design, which is why NEXT_PUBLIC_ is correct here.
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
         run: npm run build
 
       - name: Disable Jekyll

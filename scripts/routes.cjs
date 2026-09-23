@@ -1,7 +1,7 @@
 const {chromium}=require('playwright-core');
 const PORT=process.env.PORT||'3001';
 const routes=['/','/capabilities','/capabilities/lead-generation','/industries','/industries/medicare',
-  '/about','/compliance','/careers','/contact','/contact?seats=25&hours=40&rate=32&target=14','/does-not-exist'];
+  '/about','/compliance','/careers','/careers/apply','/careers/apply?role=medicare-closer','/contact','/contact?seats=25&hours=40&rate=32&target=14','/does-not-exist'];
 const W=parseInt(process.argv[2]||'1440',10), H=parseInt(process.argv[3]||'900',10);
 const tag=process.argv[4]||'d';
 (async()=>{

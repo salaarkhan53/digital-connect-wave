@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { careersIntro, roles } from '@/content/careers';
 import { contact, mailto } from '@/content/contact';
@@ -50,8 +51,8 @@ export default function CareersPage() {
           <ul className="mt-12 border-t border-white/10">
             {roles.map((role) => (
               <li key={role.slug}>
-                <a
-                  href={mailto(`Application: ${role.title}`)}
+                <Link
+                  href={`/careers/apply?role=${role.slug}`}
                   className="group flex items-center justify-between gap-6 border-b border-white/10 py-6 transition-colors duration-[280ms] hover:border-white/25"
                   data-reveal
                 >
@@ -66,13 +67,13 @@ export default function CareersPage() {
                       aria-hidden="true"
                     />
                   </span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
           <p data-reveal className="mt-8 text-sm text-white/55">
-            Applications go to{' '}
+            Prefer email? Send your CV to{' '}
             <a
               href={mailto()}
               className="text-spark underline decoration-spark/30 underline-offset-4 transition-colors duration-[160ms] hover:decoration-spark"

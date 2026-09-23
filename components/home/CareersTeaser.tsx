@@ -27,7 +27,7 @@ export function CareersTeaser() {
             {roles.map((role) => (
               <li key={role.slug}>
                 <Link
-                  href="/careers"
+                  href={`/careers/apply?role=${role.slug}`}
                   className="group flex items-center justify-between gap-4 border-b border-white/10 py-5 transition-colors duration-[280ms] hover:border-white/25"
                 >
                   <span className="font-display text-lg font-medium text-white/75 transition-colors duration-[280ms] group-hover:text-white">

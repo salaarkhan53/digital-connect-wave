@@ -178,6 +178,39 @@ source location with `DCW_LOGO_DIR`.
 
 ---
 
+## Careers applications
+
+`/careers/apply` collects the application and posts it, CV attached, to
+Web3Forms, which forwards it to the inbox its access key is registered
+against. The site is a static export with no server of its own, so the
+alternative would be no attachment at all: a `mailto:` link cannot carry a
+file.
+
+**To turn it on:**
+
+1. Enter `Contact@digitalconnectwave.net` at <https://web3forms.com>. They email
+   an access key back. No account is required.
+2. Add it to this repo as a secret named `WEB3FORMS_KEY`
+   (Settings, Secrets and variables, Actions).
+3. Re-run the Pages workflow.
+
+Until that secret exists the form says so plainly and offers email instead. It
+never pretends to submit.
+
+The key is a public identifier by design, which is why it travels as
+`NEXT_PUBLIC_`. It grants nothing beyond sending mail to the address it is
+registered against. For local work put it in `.env.local`; see `.env.example`.
+
+Constraints worth knowing: the free plan takes **one** attachment of up to
+**5 MB**, the file input must be named `attachment`, and the form must post as
+`multipart/form-data`. Both limits are enforced client-side before upload so an
+oversized CV fails with a readable message rather than a rejected POST.
+
+Applicant phone numbers are validated as **US only**, matching the rest of the
+site.
+
+---
+
 ## Review deployment (GitHub Pages)
 
 `.github/workflows/deploy-pages.yml` publishes a static export to
