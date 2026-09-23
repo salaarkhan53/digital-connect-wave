@@ -115,15 +115,25 @@ body {
   overflow-x: clip;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
+/*
+ * Layered, unlike the rules around it, because these are defaults a utility is
+ * expected to beat. Unlayered CSS outranks everything in Tailwind's `utilities`
+ * layer regardless of specificity, so while this rule sat outside a layer it
+ * silently swallowed `font-sans` and `tracking-*` on any heading that wanted
+ * them: small-caps eyebrows written as <h2> rendered in the display face with
+ * -0.02em tracking, so "Who it is for" came out as "WHOITISFOR".
+ */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
 }
 
 p {

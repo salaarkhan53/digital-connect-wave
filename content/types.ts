@@ -33,6 +33,12 @@ export type Capability = {
   features: string[];
   /** Key into components/ui/Icon.tsx */
   icon: string;
+  /**
+   * Path under public/ for this capability's illustration, when one has been
+   * supplied. Without it the visual falls back to generated brand art, so a
+   * missing illustration degrades rather than leaving a hole.
+   */
+  image?: string;
 };
 
 export type Industry = {
