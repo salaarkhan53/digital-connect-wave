@@ -1,5 +1,5 @@
 const {chromium}=require('playwright-core');
-const BASE='http://localhost:4500/digital-connect-wave';
+const BASE=process.env.BASE||'http://localhost:4500/digital-connect-wave';
 const routes=['/','/capabilities/','/capabilities/lead-generation/','/industries/','/industries/medicare/',
   '/about/','/compliance/','/careers/','/contact/','/nope/'];
 (async()=>{

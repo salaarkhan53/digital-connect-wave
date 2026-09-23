@@ -30,18 +30,26 @@ const fragmentShader = /* glsl */ `
     // uv.x runs the length of the tube: use it as the gradient axis.
     float t = vUv.x;
     vec3 col = mix(uDeep, uBlue, smoothstep(0.0, 0.55, t));
-    col = mix(col, uSpark, smoothstep(0.7, 1.0, t) * 0.5);
+    col = mix(col, uSpark, smoothstep(0.7, 1.0, t) * 0.45);
 
-    // Two specular flares chasing each other around the loop — the white
-    // hot-spots in the logo, in motion.
+    /*
+     * Two highlights travel the loop. They are deliberately restrained: an
+     * additive flare strong enough to reach white clips the wireframe into a
+     * solid blown-out patch, and the crosshatch — the whole point of the mark —
+     * disappears inside it. So the flare is wide and soft rather than hot, and
+     * it brightens toward cyan instead of toward white.
+     */
     float head = fract(t - uTime * 0.11);
-    float flare = smoothstep(0.05, 0.0, head) + smoothstep(0.05, 0.0, fract(head + 0.5));
-    col += uSpark * flare * 1.5;
+    float flare = smoothstep(0.11, 0.0, head) + smoothstep(0.11, 0.0, fract(head + 0.5));
+    col += uSpark * flare * 0.42;
 
     // Dim the far side of the tube so the wireframe reads as volume rather
     // than as a flat tangle of lines.
     float depth = 0.55 + 0.45 * sin(vUv.y * 6.2831853);
-    gl_FragColor = vec4(col * depth, 1.0);
+    col *= depth;
+
+    // Hard ceiling below pure white, so no part of the mesh can clip out.
+    gl_FragColor = vec4(min(col, vec3(0.82)), 1.0);
   }
 `;
 

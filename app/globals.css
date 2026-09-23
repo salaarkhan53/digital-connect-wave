@@ -275,3 +275,30 @@ html[data-js] [data-headline] {
     opacity: 1;
   }
 }
+
+/* Light travelling along the footer's top edge. */
+@keyframes footer-sweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(420%);
+    opacity: 0;
+  }
+}
+
+.footer-sweep {
+  animation: footer-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-sweep {
+    animation: none;
+    opacity: 0.35;
+  }
+}

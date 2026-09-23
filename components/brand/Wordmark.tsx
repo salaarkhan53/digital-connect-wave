@@ -22,10 +22,10 @@ export function Wordmark({
   const inner = (
     <span className={`flex items-center gap-2.5 ${className}`}>
       <Image
-        src={asset("/brand/mark-sm.webp")}
+        src={asset("/brand/symbol-sm.webp")}
         alt=""
-        width={256}
-        height={138}
+        width={320}
+        height={196}
         priority
         className="h-8 w-auto shrink-0 sm:h-9"
         aria-hidden="true"

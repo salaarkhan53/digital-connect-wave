@@ -27,10 +27,10 @@ const SYMBOL_MASK: React.CSSProperties = {
 function StaticMark() {
   return (
     <Image
-      src={asset("/brand/mark.webp")}
+      src={asset("/brand/symbol.webp")}
       alt=""
-      width={1200}
-      height={648}
+      width={800}
+      height={493}
       priority
       aria-hidden="true"
       className="h-full w-full object-contain drop-shadow-[0_0_80px_rgb(12_123_240/0.45)]"

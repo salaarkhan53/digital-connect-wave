@@ -1,7 +1,7 @@
 /**
- * Derives the web-optimized brand assets from the source logo PNGs.
- * The sources live outside the repo (they are 3-12 MB each); this script
- * writes only the small derivatives that ship with the site.
+ * Derives the web-optimized brand assets from the source symbol artwork.
+ * The source lives outside the repo; this script writes only the small
+ * derivatives that ship with the site.
  *
  *   node scripts/generate-brand-assets.mjs
  */
@@ -12,30 +12,83 @@ const SRC = process.env.DCW_LOGO_DIR ?? 'X:/Obaid Ceo/DCW';
 const OUT = 'public/brand';
 const APP = 'app';
 
-const MARK = `${SRC}/logo no bg.png`;
-const LOCKUP = `${SRC}/Digital Connect Wave.png`;
+const SYMBOL = `${SRC}/symbol.png`;
 
 await mkdir(OUT, { recursive: true });
 
-// The mark is transparent but its glow is painted on black; trim the dead margin
-// so the symbol fills its box predictably at every size.
-const mark = await sharp(MARK).trim({ threshold: 10 }).toBuffer();
-const { width, height } = await sharp(mark).metadata();
-console.log(`mark trimmed -> ${width}x${height}`);
+/*
+ * The current brand symbol: the clean wireframe lemniscate with its signal
+ * waves. It arrives as glow painted on a near-black card rather than with an
+ * alpha channel, so transparency is rebuilt from the artwork itself.
+ *
+ * Alpha comes from the brightest channel, not from luminance. Luminance weights
+ * blue at 7%, so a blue glow on black would read as almost transparent and the
+ * mark would disappear. The colour is then un-premultiplied — divided back out
+ * by that alpha — so the blue stays saturated instead of washing toward the
+ * background it was painted on.
+ */
+{
+  const { data, info } = await sharp(SYMBOL)
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
 
-await sharp(mark).resize({ width: 1200 }).webp({ quality: 92 }).toFile(`${OUT}/mark.webp`);
-await sharp(mark).resize({ width: 256 }).webp({ quality: 92 }).toFile(`${OUT}/mark-sm.webp`);
+  const px = info.width * info.height;
+  const out = Buffer.alloc(px * 4);
+  // The card is ~#101010, so anything at or below that is background.
+  const FLOOR = 18;
+  const scale = 255 / (255 - FLOOR);
 
-// Full lockup, trimmed of its white margin — used for social share art.
-await sharp(LOCKUP)
-  .trim({ threshold: 15 })
-  .resize({ width: 900 })
-  .webp({ quality: 92 })
-  .toFile(`${OUT}/lockup.webp`);
+  for (let i = 0; i < px; i++) {
+    const r = data[i * 3];
+    const g = data[i * 3 + 1];
+    const b = data[i * 3 + 2];
 
-// Square app icons: the mark centred on the brand void colour.
+    const peak = Math.max(r, g, b);
+    const a = Math.max(0, Math.min(255, Math.round((peak - FLOOR) * scale)));
+
+    if (a === 0) {
+      out[i * 4] = out[i * 4 + 1] = out[i * 4 + 2] = out[i * 4 + 3] = 0;
+      continue;
+    }
+
+    const k = 255 / a;
+    out[i * 4] = Math.min(255, Math.round(r * k));
+    out[i * 4 + 1] = Math.min(255, Math.round(g * k));
+    out[i * 4 + 2] = Math.min(255, Math.round(b * k));
+    out[i * 4 + 3] = a;
+  }
+
+  const cut = await sharp(out, {
+    raw: { width: info.width, height: info.height, channels: 4 },
+  })
+    .trim({ threshold: 4 })
+    .png()
+    .toBuffer();
+
+  const meta = await sharp(cut).metadata();
+  console.log(`symbol trimmed -> ${meta.width}x${meta.height}`);
+
+  /*
+   * Three sizes, because a dense wireframe barely compresses — dropping WebP
+   * quality from 92 to 60 saves under 20%, while halving the width saves 60%.
+   * So each one is cut to what its slot actually renders at rather than
+   * shipping one large file everywhere.
+   */
+  // Hero fallback: the only place the symbol is seen at full strength.
+  await sharp(cut).resize({ width: 800 }).webp({ quality: 72, effort: 6 })
+    .toFile(`${OUT}/symbol.webp`);
+  // Footer and CTA watermarks, rendered at 6-10% opacity — detail is invisible.
+  await sharp(cut).resize({ width: 480 }).webp({ quality: 62, effort: 6 })
+    .toFile(`${OUT}/symbol-bg.webp`);
+  // Header lockup, ~36px tall on screen.
+  await sharp(cut).resize({ width: 320 }).webp({ quality: 80, effort: 6 })
+    .toFile(`${OUT}/symbol-sm.webp`);
+}
+
+// Square app icons: the symbol centred on the brand void colour.
 async function square(size, file) {
-  const inner = await sharp(mark)
+  const inner = await sharp(`${OUT}/symbol.webp`)
     .resize({ width: Math.round(size * 0.82), fit: 'inside' })
     .toBuffer();
   await sharp({

@@ -14,6 +14,12 @@ import { prefersReducedMotion } from '@/lib/motion';
  * for reduced-motion users and on touch devices, where native momentum is
  * better than anything we would simulate.
  */
+declare global {
+  interface Window {
+    __lenis?: Lenis;
+  }
+}
+
 export function SmoothScroll() {
   useEffect(() => {
     if (prefersReducedMotion()) return;
@@ -30,12 +36,18 @@ export function SmoothScroll() {
 
     lenis.on('scroll', ScrollTrigger.update);
 
+    // Published so in-page controls (back to top, anchor jumps) can drive the
+    // same instance. Calling window.scrollTo while Lenis is running fights it —
+    // two things animating one scroll position.
+    window.__lenis = lenis;
+
     const tick = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(tick);
+      delete window.__lenis;
       lenis.destroy();
     };
   }, []);

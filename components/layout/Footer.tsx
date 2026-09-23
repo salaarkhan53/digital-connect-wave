@@ -1,110 +1,218 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import { footerNav, site, socials } from '@/content/site';
 import { contact } from '@/content/contact';
 import { Wordmark } from '@/components/brand/Wordmark';
+import { BackToTop } from '@/components/layout/BackToTop';
+import { Reveal } from '@/components/ui/Reveal';
 import { asset } from '@/lib/asset';
+
+/**
+ * The three ways to reach us, as a row rather than a stacked list.
+ *
+ * Stacked, they made the left column roughly twice the height of the link
+ * columns beside it, and that mismatch is what left the band of dead space
+ * across the bottom of the footer. Spread across the full width they balance
+ * the grid and read as the primary action they actually are.
+ */
+const channels = [
+  {
+    icon: Phone,
+    label: 'Call the floor',
+    value: contact.phoneDisplay,
+    href: contact.phoneHref,
+    note: 'Weekdays, US hours',
+  },
+  {
+    icon: Mail,
+    label: 'Email us',
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+    note: 'Answered within one working day',
+  },
+  {
+    icon: MapPin,
+    label: 'Headquarters',
+    value: contact.addressLines[0],
+    href: null,
+    note: contact.addressLines[1],
+  },
+];
+
+const cardShell =
+  'group flex h-full items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-4 sm:p-5 ' +
+  'transition-[border-color,background-color,transform] duration-[280ms] ' +
+  '[transition-timing-function:cubic-bezier(0.16,1,0.3,1)]';
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden border-t border-white/10 bg-void">
-      {/* The mark, enormous and barely there, bleeding off the bottom edge. */}
-      <Image
-        src={asset("/brand/mark.webp")}
-        alt=""
-        width={1200}
-        height={648}
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 left-1/2 -z-10 w-[min(72rem,140%)] max-w-none -translate-x-1/2 opacity-[0.07] select-none"
-      />
+    <footer className="relative isolate overflow-hidden bg-void">
+      {/* A brand-coloured light travelling along the top edge. */}
+      <div className="relative h-px w-full overflow-hidden bg-white/10" aria-hidden="true">
+        <span className="footer-sweep absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-spark to-transparent" />
+      </div>
 
-      <div className="shell py-16 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_2fr]">
-          <div>
+      {/* The mark as texture, anchored right so it never sits behind a block of
+          text and never dictates how tall the footer has to be. */}
+      <Image
+        src={asset('/brand/symbol-bg.webp')}
+        alt=""
+        width={480}
+        height={296}
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-28 -top-20 -z-10 w-[min(44rem,85%)] max-w-none opacity-[0.06] select-none"
+      />
+      <div className="mesh-field absolute inset-0 -z-20 opacity-50" aria-hidden="true" />
+
+      <Reveal className="shell py-10 md:py-14">
+        {/* ------------------------------------------------- contact strip */}
+        <ul className="grid gap-3 sm:grid-cols-3">
+          {channels.map((channel) => {
+            const Icon = channel.icon;
+            const inner = (
+              <>
+                <span
+                  className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-blue/25 bg-blue/10 text-blue-bright transition-colors duration-[280ms] group-hover:border-spark/50 group-hover:bg-spark/15 group-hover:text-spark"
+                  aria-hidden="true"
+                >
+                  <Icon className="size-5" strokeWidth={1.5} />
+                </span>
+
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-1.5 text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-white/45">
+                    {channel.label}
+                    {channel.href && (
+                      <ArrowUpRight
+                        className="size-3 -translate-x-1 opacity-0 transition-all duration-[280ms] group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:transition-none"
+                        strokeWidth={2.5}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </span>
+                  <span className="mt-1.5 block truncate font-display text-[0.95rem] font-medium text-white">
+                    {channel.value}
+                  </span>
+                  <span className="mt-0.5 block truncate text-xs text-white/45">
+                    {channel.note}
+                  </span>
+                </span>
+              </>
+            );
+
+            return (
+              <li key={channel.label} data-reveal>
+                {channel.href ? (
+                  <a
+                    href={channel.href}
+                    className={`${cardShell} hover:-translate-y-0.5 hover:border-spark/40 hover:bg-white/[0.05] motion-reduce:hover:translate-y-0`}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div className={cardShell}>{inner}</div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* --------------------------------------------- brand + navigation */}
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_2fr] lg:gap-14">
+          <div data-reveal>
             <Wordmark />
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/55">
-              {site.description}
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
+              Contact operations for US brands, built on documented process and
+              recorded QA.
             </p>
 
-            <ul className="mt-8 space-y-3 text-sm">
-              <li>
-                <a
-                  href={contact.phoneHref}
-                  className="inline-flex min-h-[44px] items-center gap-3 text-white/75 transition-colors duration-[160ms] hover:text-spark"
-                >
-                  <Phone className="size-4 shrink-0 text-blue-bright" strokeWidth={1.5} aria-hidden="true" />
-                  {contact.phoneDisplay}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="inline-flex min-h-[44px] items-center gap-3 break-all text-white/75 transition-colors duration-[160ms] hover:text-spark"
-                >
-                  <Mail className="size-4 shrink-0 text-blue-bright" strokeWidth={1.5} aria-hidden="true" />
-                  {contact.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-3 py-2 text-white/55">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-blue-bright" strokeWidth={1.5} aria-hidden="true" />
-                <address className="not-italic leading-relaxed">
-                  {contact.addressLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </address>
-              </li>
-            </ul>
+            <Link
+              href="/contact"
+              className="group mt-6 inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-spark"
+            >
+              Start a conversation
+              <ArrowUpRight
+                className="size-4 transition-transform duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </Link>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-3">
-            {footerNav.map((group) => (
-              <div key={group.title}>
-                <h2 className="font-display text-xs font-medium uppercase tracking-[0.18em] text-white/55">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 sm:gap-8">
+            {footerNav.map((group, i) => {
+              // Three groups in two mobile columns leaves the last one alone on
+              // its own row with an empty half beside it. The odd one out spans
+              // the full width and lays its own links out two-up instead.
+              const orphan = i === footerNav.length - 1 && footerNav.length % 2 === 1;
+              return (
+              <div
+                key={group.title}
+                data-reveal
+                className={orphan ? 'col-span-2 sm:col-span-1' : undefined}
+              >
+                <h2 className="font-display text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-white/45">
                   {group.title}
                 </h2>
-                <ul className="mt-4 space-y-1">
+                <ul
+                  className={`mt-3.5 space-y-0.5 ${
+                    orphan ? 'grid grid-cols-2 gap-x-6 sm:block' : ''
+                  }`}
+                >
                   {group.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="inline-block py-1.5 text-sm text-white/65 transition-colors duration-[160ms] hover:text-white"
+                        className="group inline-flex items-center gap-1.5 py-1 text-sm text-white/65 transition-colors duration-[160ms] hover:text-white"
                       >
+                        {/* A dash that grows into the link on hover. */}
+                        <span
+                          className="h-px w-0 bg-spark transition-[width] duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:w-3 motion-reduce:transition-none"
+                          aria-hidden="true"
+                        />
                         {link.label}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
+              );
+            })}
+          </nav>
         </div>
 
-        <div className="rule-fade mt-14" />
-
-        <div className="flex flex-col gap-4 pt-6 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>
+        {/* ------------------------------------------------------ bottom bar */}
+        <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/45">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
-          <p className="font-display tracking-[0.14em] uppercase text-white/55">
-            {site.tagline}
-          </p>
-          {/* socials is intentionally empty until real profile URLs are supplied. */}
-          {socials.length > 0 && (
-            <ul className="flex gap-3">
-              {socials.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className="text-white/50 hover:text-spark" aria-label={s.label}>
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <p className="font-display text-[0.6875rem] uppercase tracking-[0.16em] text-white/35">
+              {site.tagline}
+            </p>
+
+            {/* Empty until real profile URLs exist — see content/site.ts. */}
+            {socials.length > 0 && (
+              <ul className="flex gap-2">
+                {socials.map((s) => (
+                  <li key={s.href}>
+                    <a
+                      href={s.href}
+                      aria-label={s.label}
+                      className="flex size-9 items-center justify-center rounded-full border border-white/12 text-white/55 transition-colors duration-[160ms] hover:border-spark/50 hover:text-spark"
+                    >
+                      {s.label.charAt(0)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <BackToTop />
+          </div>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

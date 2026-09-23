@@ -16,10 +16,10 @@ export function CTABand({
     <section className="relative isolate overflow-hidden border-t border-white/10 bg-void">
       {/* The mark rising out of the bottom edge, barely lit. */}
       <Image
-        src={asset("/brand/mark.webp")}
+        src={asset("/brand/symbol-bg.webp")}
         alt=""
-        width={1200}
-        height={648}
+        width={480}
+        height={296}
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-40 left-1/2 -z-10 w-[min(64rem,130%)] max-w-none -translate-x-1/2 opacity-[0.1] blur-[1px] select-none"
       />
