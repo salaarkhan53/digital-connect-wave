@@ -27,7 +27,7 @@ export const stats: Stat[] = [
     value: 1200,
     suffix: '+',
     label: 'Clients served',
-    detail: 'Campaigns delivered for brands across nine verticals.',
+    detail: 'Campaigns delivered for brands across eight verticals.',
     verified: false,
   },
   {

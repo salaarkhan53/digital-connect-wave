@@ -11,7 +11,7 @@ import { LightBand } from '@/components/ui/LightBand';
 export const metadata: Metadata = {
   title: 'Industries',
   description:
-    'Nine verticals we already know the script for: insurance, Medicare, Final Expense, healthcare billing, financial services, retail, telecom, technology and home services.',
+    'Eight verticals we already know the script for: insurance, Medicare, Final Expense, healthcare billing, financial services, retail, telecom and technology.',
 };
 
 export default function IndustriesPage() {
@@ -19,7 +19,7 @@ export default function IndustriesPage() {
     <>
       <PageHero
         eyebrow="Industries"
-        title="Nine verticals we already know the script for."
+        title="Eight verticals we already know the script for."
         lede="Each one has its own objections, its own compliance load and its own idea of what a good call sounds like. We do not start from scratch on any of them."
       />
 

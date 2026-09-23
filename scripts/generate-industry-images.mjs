@@ -22,7 +22,6 @@ const bySlug = {
   'Retail and E-commerce': 'retail-ecommerce',
   Telecom: 'telecom',
   'Technology Saas': 'technology',
-  'Home Services': 'home-services',
 };
 
 await mkdir(OUT, { recursive: true });

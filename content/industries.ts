@@ -113,20 +113,6 @@ export const industries: Industry[] = [
     capabilities: ['b2b-outreach', 'lead-generation', 'customer-support'],
     image: '/industries/technology.webp',
   },
-  {
-    slug: 'home-services',
-    title: 'Home Services',
-    summary: 'Booked appointments and a support line that never rings out.',
-    body:
-      'In home services a missed call is a lost job, usually to whoever answered first. We answer the line, book against your calendar, and follow up the estimates that went quiet.',
-    challenges: [
-      'Missed calls converting to lost jobs',
-      'Appointment setting against live capacity',
-      'Estimate follow-up and reactivation',
-    ],
-    capabilities: ['inbound-support', 'outbound-campaigns', 'lead-generation'],
-    image: '/industries/home-services.webp',
-  },
 ];
 
 export const industryBySlug = (slug: string) => industries.find((i) => i.slug === slug);

@@ -12,7 +12,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
  * Sutherland's hover-reveal industry grid, rebuilt as a list.
  *
  * The art panel follows the active row rather than sitting inside each cell,
- * which keeps one large image on screen instead of nine small ones. The active
+ * which keeps one large image on screen instead of eight small ones. The active
  * row is driven by focus as well as hover, so keyboard users get the same
  * feedback rather than a dead list.
  */
@@ -26,7 +26,7 @@ export function Industries() {
           tone="dark"
           eyebrow="Industries"
           title={<span id="industries-heading">Where we already know the script.</span>}
-          lede="Nine verticals with their own objections, their own compliance load and their own idea of a good call."
+          lede="Eight verticals with their own objections, their own compliance load and their own idea of a good call."
         />
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_22rem] lg:items-start">
