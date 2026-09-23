@@ -17,25 +17,39 @@ import { asset } from '@/lib/asset';
 export function CapabilityVisual({
   capability,
   index,
+  frame = 'hero',
   sizes = '(min-width: 1024px) 34rem, 90vw',
   priority = false,
 }: {
   capability: Capability;
   index: number;
+  /**
+   * Which crop to serve. The detail hero is 5:4 and the index cards are 16:9,
+   * and the two are far enough apart that letting CSS crop one file down to
+   * the other cut the top off several of the subjects' heads. Each frame gets
+   * its own derivative instead.
+   */
+  frame?: 'hero' | 'card';
   sizes?: string;
   priority?: boolean;
 }) {
   if (capability.image) {
+    const src = frame === 'card' ? capability.image.replace(/\.webp$/, '-wide.webp') : capability.image;
+
     return (
       <>
         <Image
-          src={asset(capability.image)}
+          src={asset(src)}
           alt=""
           fill
           sizes={sizes}
           priority={priority}
           className="object-cover"
         />
+        {/*
+          The art is already dark and blue, so this only has to seat it against
+          the band it sits on and keep the card's own text off a busy edge.
+        */}
         <div
           className="absolute inset-0 bg-gradient-to-t from-void/70 via-void/10 to-transparent"
           aria-hidden="true"

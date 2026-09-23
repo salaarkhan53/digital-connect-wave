@@ -44,7 +44,9 @@ export default function CapabilitiesPage() {
                     <CapabilityVisual
                       capability={cap}
                       index={i}
+                      frame="card"
                       sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
+                      priority={i === 0}
                     />
                   </div>
 

@@ -19,6 +19,7 @@ export const capabilities: Capability[] = [
       'Recorded call quality monitoring',
     ],
     icon: 'phone-incoming',
+    image: '/capabilities/inbound-support.webp',
   },
   {
     slug: 'outbound-campaigns',
@@ -34,6 +35,7 @@ export const capabilities: Capability[] = [
       'Script testing and refinement',
     ],
     icon: 'phone-outgoing',
+    image: '/capabilities/outbound-campaigns.webp',
   },
   {
     slug: 'customer-support',
@@ -49,6 +51,7 @@ export const capabilities: Capability[] = [
       'Performance reporting you can audit',
     ],
     icon: 'headset',
+    image: '/capabilities/customer-support.webp',
   },
   {
     slug: 'lead-generation',
@@ -64,6 +67,7 @@ export const capabilities: Capability[] = [
       'Conversion tracking end to end',
     ],
     icon: 'target',
+    image: '/capabilities/lead-generation.webp',
   },
   {
     slug: 'sales-verification',
@@ -79,6 +83,7 @@ export const capabilities: Capability[] = [
       'Independent quality review',
     ],
     icon: 'shield-check',
+    image: '/capabilities/sales-verification.webp',
   },
   {
     slug: 'medical-billing',
@@ -94,6 +99,7 @@ export const capabilities: Capability[] = [
       'Records accuracy checks',
     ],
     icon: 'file-text',
+    image: '/capabilities/medical-billing.webp',
   },
   {
     slug: 'b2b-outreach',
@@ -109,6 +115,7 @@ export const capabilities: Capability[] = [
       'Pipeline reporting',
     ],
     icon: 'building',
+    image: '/capabilities/b2b-outreach.webp',
   },
   {
     slug: 'digital-marketing',
@@ -124,6 +131,7 @@ export const capabilities: Capability[] = [
       'Reporting from click through to close',
     ],
     icon: 'megaphone',
+    image: '/capabilities/digital-marketing.webp',
   },
 ];
 
