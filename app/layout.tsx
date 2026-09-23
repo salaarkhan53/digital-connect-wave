@@ -7,6 +7,9 @@ import { Footer } from '@/components/layout/Footer';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
 import './globals.css';
 
+/** True for the GitHub Pages review build. */
+const isPreview = process.env.NEXT_PUBLIC_PREVIEW === 'true';
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -27,7 +30,14 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  /*
+   * A review deployment is a work in progress carrying figures that are not
+   * confirmed yet, so it tells crawlers to stay away. Production indexes
+   * normally.
+   */
+  robots: isPreview
+    ? { index: false, follow: false, nocache: true }
+    : { index: true, follow: true },
 };
 
 /**

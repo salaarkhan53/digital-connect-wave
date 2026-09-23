@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  # So a rebuild can be triggered without pushing a commit.
+  workflow_dispatch:
+
+# Pages needs to read the repo and mint an id-token to deploy.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it mid-publish, but only
+# keep one queued behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build static export
+        env:
+          # Switches next.config.ts to `output: 'export'` with the repo basePath.
+          GITHUB_PAGES: 'true'
+          # This is a review build: noindex everywhere, and the canonical URLs
+          # point at Pages rather than claiming to be the production domain.
+          NEXT_PUBLIC_PREVIEW: 'true'
+          NEXT_PUBLIC_SITE_URL: https://salaarkhan53.github.io/digital-connect-wave
+        run: npm run build
+
+      - name: Disable Jekyll
+        # Without this, Pages ignores every directory starting with an
+        # underscore — which is all of Next.js's _next assets.
+        run: touch ./out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

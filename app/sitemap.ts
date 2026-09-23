@@ -3,6 +3,9 @@ import { site } from '@/content/site';
 import { capabilities } from '@/content/capabilities';
 import { industries } from '@/content/industries';
 
+// A static export has no server to generate sitemap.xml on request.
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const url = (path: string) => `${site.url}${path}`;

@@ -8,8 +8,13 @@ export const site = {
   name: 'Digital Connect Wave',
   shortName: 'DCW',
   tagline: "Connecting Tomorrow's Possibilities",
-  /** REVIEW: confirm the production domain before launch. */
-  url: 'https://www.digitalconnectwave.net',
+  /**
+   * Canonical origin. Overridden by NEXT_PUBLIC_SITE_URL so a review
+   * deployment describes itself honestly instead of claiming to be the
+   * production domain.
+   * REVIEW: confirm the production domain before launch.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.digitalconnectwave.net',
   description:
     'Digital Connect Wave runs the contact operations behind US brands: inbound support, outbound campaigns, lead generation and compliance-led verification, built on documented process and recorded QA.',
 } as const;

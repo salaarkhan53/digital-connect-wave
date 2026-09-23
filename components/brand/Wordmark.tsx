@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { asset } from '@/lib/asset';
 
 /**
  * The lockup is assembled rather than shipped as one image: the mark is the
@@ -21,7 +22,7 @@ export function Wordmark({
   const inner = (
     <span className={`flex items-center gap-2.5 ${className}`}>
       <Image
-        src="/brand/mark-sm.webp"
+        src={asset("/brand/mark-sm.webp")}
         alt=""
         width={256}
         height={138}

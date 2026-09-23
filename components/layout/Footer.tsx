@@ -4,13 +4,14 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import { footerNav, site, socials } from '@/content/site';
 import { contact } from '@/content/contact';
 import { Wordmark } from '@/components/brand/Wordmark';
+import { asset } from '@/lib/asset';
 
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden border-t border-white/10 bg-void">
       {/* The mark, enormous and barely there, bleeding off the bottom edge. */}
       <Image
-        src="/brand/mark.webp"
+        src={asset("/brand/mark.webp")}
         alt=""
         width={1200}
         height={648}

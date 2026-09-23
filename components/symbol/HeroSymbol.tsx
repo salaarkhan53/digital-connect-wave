@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 /**
  * The hero symbol, behind one interface.
@@ -26,7 +27,7 @@ const SYMBOL_MASK: React.CSSProperties = {
 function StaticMark() {
   return (
     <Image
-      src="/brand/mark.webp"
+      src={asset("/brand/mark.webp")}
       alt=""
       width={1200}
       height={648}

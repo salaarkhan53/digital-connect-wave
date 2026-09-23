@@ -160,3 +160,34 @@ npm run brand:assets
 Reads the source logos (outside the repo — they are 3–12 MB each) and writes the
 optimized derivatives into `public/brand/` plus the app icons. Override the
 source location with `DCW_LOGO_DIR`.
+
+---
+
+## Review deployment (GitHub Pages)
+
+`.github/workflows/deploy-pages.yml` publishes a static export to
+<https://salaarkhan53.github.io/digital-connect-wave/> on every push to
+`master`.
+
+The Pages build is deliberately different from production, driven by three
+environment variables the workflow sets:
+
+| Variable | Effect |
+|---|---|
+| `GITHUB_PAGES=true` | switches `next.config.ts` to `output: 'export'` with the repo `basePath` |
+| `NEXT_PUBLIC_PREVIEW=true` | `noindex, nofollow` on every page and a `Disallow: /` robots.txt |
+| `NEXT_PUBLIC_SITE_URL` | canonical URLs point at Pages rather than claiming to be the production domain |
+
+**The published site is world-readable.** GitHub Pages has no access control
+outside Enterprise Cloud, so treat the review URL as public even though the
+figures in `content/REVIEW.md` are not signed off. The `noindex` keeps it out
+of search results; it does not keep it private.
+
+Two things to know about the static export:
+
+- `next/image` runs `unoptimized`, because Pages has no image optimizer. That
+  also means it does not prefix `basePath` onto `src`, which is what
+  `lib/asset.ts` exists to do.
+- Link prefetch payloads 404 in devtools — a Next 16 export quirk documented in
+  `next.config.ts`. Navigation is unaffected and it does not occur on a real
+  Next.js host.

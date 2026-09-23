@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { contact } from '@/content/contact';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
+import { asset } from '@/lib/asset';
 
 /** The closing call to action. Reused at the foot of every page. */
 export function CTABand({
@@ -15,7 +16,7 @@ export function CTABand({
     <section className="relative isolate overflow-hidden border-t border-white/10 bg-void">
       {/* The mark rising out of the bottom edge, barely lit. */}
       <Image
-        src="/brand/mark.webp"
+        src={asset("/brand/mark.webp")}
         alt=""
         width={1200}
         height={648}
