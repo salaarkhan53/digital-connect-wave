@@ -84,7 +84,7 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="shell grid w-full items-center gap-10 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+      <div className="shell grid w-full items-center gap-6 py-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-12">
         {/* ------------------------------------------------------- copy */}
         <div className="relative z-10 max-w-2xl">
           <p
@@ -97,18 +97,18 @@ export function Hero() {
 
           <h1
             data-headline
-            className="mt-6 text-[length:var(--text-display)] font-semibold text-white"
+            className="mt-5 text-[length:var(--text-display)] font-semibold text-white"
           >
             Connecting tomorrow&apos;s possibilities.
           </h1>
 
-          <p data-stage className="mt-6 max-w-xl text-[length:var(--text-lede)] text-white/60">
+          <p data-stage className="mt-5 max-w-xl text-[length:var(--text-lede)] text-white/60">
             We run the contact operations behind US brands — inbound support,
             outbound campaigns, qualified pipeline and compliance-led
             verification, built on documented process and recorded QA.
           </p>
 
-          <div data-stage className="mt-9 flex flex-wrap items-center gap-3">
+          <div data-stage className="mt-7 flex flex-wrap items-center gap-3">
             <Button href="/contact">Let&apos;s talk outcomes</Button>
             <Button href="/capabilities" variant="ghost" icon={false}>
               See what we run
@@ -119,7 +119,7 @@ export function Hero() {
         {/* ----------------------------------------------------- symbol */}
         <div
           data-stage
-          className="relative mx-auto aspect-[4/3] w-full max-w-[38rem] lg:aspect-square lg:max-w-none"
+          className="relative mx-auto aspect-[4/3] max-h-[26vh] w-full max-w-[34rem] sm:max-h-[40vh] lg:aspect-square lg:max-h-[62vh] lg:max-w-none"
         >
           <HeroSymbol className="absolute inset-0" />
         </div>

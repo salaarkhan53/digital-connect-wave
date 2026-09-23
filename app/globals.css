@@ -35,12 +35,24 @@
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 
-  /* Fluid type ramp */
-  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 6rem);
-  --text-h1: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
-  --text-h2: clamp(1.75rem, 1.3rem + 2.1vw, 3rem);
-  --text-h3: clamp(1.3rem, 1.1rem + 0.9vw, 1.875rem);
-  --text-lede: clamp(1.0625rem, 1rem + 0.45vw, 1.375rem);
+  /*
+   * Fluid type ramp, sized against viewport height as well as width.
+   *
+   * Width alone pinned the display size to its 6rem ceiling on every desktop,
+   * which made the hero 830px tall on a 768px-high laptop — taller than the
+   * screen it had to fit in. The `min()` lets whichever dimension is scarcer
+   * win, so a wide-but-short window gets smaller type instead of a hero you
+   * have to zoom out to read.
+   *
+   * On phones the vw term is always the smaller of the two, so the height term
+   * never takes effect there — no reflow when mobile browser chrome slides
+   * away mid-scroll.
+   */
+  --text-display: clamp(2.25rem, min(5vw, 7.6vh), 4.75rem);
+  --text-h1: clamp(2rem, min(3.6vw, 6vh), 3.5rem);
+  --text-h2: clamp(1.625rem, min(2.6vw, 4.4vh), 2.625rem);
+  --text-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  --text-lede: clamp(1rem, 0.95rem + 0.4vw, 1.1875rem);
 
   /* Motion — one scale, used everywhere */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -60,6 +72,26 @@
 @media (min-width: 768px) {
   :root {
     --gutter: 2rem;
+  }
+}
+
+/*
+ * The container grows on large monitors. Held at a flat 80rem, a 2560px screen
+ * left 640px of dead space down each side and the page read as a narrow column
+ * floating in the middle rather than as a layout. The text itself stays inside
+ * its own measure — only the frame widens.
+ */
+@media (min-width: 1600px) {
+  :root {
+    --shell: 88rem;
+    --gutter: 2.5rem;
+  }
+}
+
+@media (min-width: 2000px) {
+  :root {
+    --shell: 96rem;
+    --gutter: 3rem;
   }
 }
 
