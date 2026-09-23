@@ -61,7 +61,7 @@ export function ComplianceBar() {
               </span>
               <div>
                 <h3 className="font-display text-base font-medium text-white">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/50 body-justify">{item.body}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/50">{item.body}</p>
               </div>
             </li>
           ))}

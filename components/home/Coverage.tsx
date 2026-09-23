@@ -43,7 +43,7 @@ export function Coverage() {
               <MapPin className="mt-0.5 size-5 shrink-0 text-blue-bright" strokeWidth={1.5} aria-hidden="true" />
               <div>
                 <p className="font-display text-sm font-medium text-white">Headquarters</p>
-                <address className="mt-1 text-sm not-italic leading-relaxed text-white/55 body-justify">
+                <address className="mt-1 text-sm not-italic leading-relaxed text-white/55">
                   {contact.addressLines.map((line) => (
                     <span key={line} className="block">
                       {line}

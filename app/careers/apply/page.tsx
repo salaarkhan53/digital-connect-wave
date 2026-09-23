@@ -65,7 +65,7 @@ export default function ApplyPage() {
                   ))}
                 </ul>
 
-                <p className="body-justify mt-6 border-t border-[color:var(--color-hairline)] pt-5 text-sm leading-relaxed text-muted">
+                <p className="mt-6 border-t border-[color:var(--color-hairline)] pt-5 text-sm leading-relaxed text-muted">
                   Prefer email? Send your CV to{' '}
                   <a
                     href={`mailto:${contact.email}`}

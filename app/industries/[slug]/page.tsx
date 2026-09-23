@@ -49,44 +49,70 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
 
       <section className="band-light">
         <Reveal className="shell section">
-          <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+          {/*
+            The intro and the artwork sit at comparable weight. A 4:5 portrait
+            here ran past 700px tall beside a 300px block of copy, which is why
+            the text read as small: it was not, the picture was simply enormous.
+          */}
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <div>
               <p
                 data-reveal
-                className="text-[length:var(--text-lede)] leading-relaxed text-ink body-justify"
+                className="text-[clamp(1.0625rem,1rem+0.5vw,1.3125rem)] leading-relaxed text-ink body-justify"
               >
                 {industry.body}
               </p>
 
-              <h2 data-reveal className="mt-10 font-display text-lg font-medium text-ink">
-                What usually goes wrong
-              </h2>
-              <ul data-reveal className="mt-5 space-y-3">
-                {industry.challenges.map((challenge) => (
-                  <li key={challenge} className="flex items-start gap-3 text-sm text-muted">
-                    <TriangleAlert
-                      className="mt-0.5 size-4 shrink-0 text-blue-ink"
-                      strokeWidth={1.75}
-                      aria-hidden="true"
-                    />
-                    {challenge}
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <div
               data-reveal
-              className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void lg:self-start"
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void lg:aspect-[5/4]"
               aria-hidden="true"
             >
               <IndustryVisual
                 industry={industry}
                 index={index}
-                sizes="(min-width: 1024px) 28rem, 90vw"
+                sizes="(min-width: 1024px) 34rem, 90vw"
                 priority
               />
             </div>
+          </div>
+
+          {/* Challenges read as a row of cards rather than a short bulleted list
+              stranded under the copy. */}
+          <div className="mt-14">
+            <h2
+              data-reveal
+              className="flex items-center gap-2.5 font-sans text-xs font-medium uppercase tracking-[0.18em] text-blue-ink"
+            >
+              <span className="h-px w-6 bg-blue/40" aria-hidden="true" />
+              What usually goes wrong
+            </h2>
+
+            <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+              {industry.challenges.map((challenge, i) => (
+                <li
+                  key={challenge}
+                  data-reveal
+                  className="group relative overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-mist p-6 transition-[border-color,transform] duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-blue/40"
+                >
+                  <span
+                    className="flex size-10 items-center justify-center rounded-xl border border-blue/20 bg-white text-blue-ink"
+                    aria-hidden="true"
+                  >
+                    <TriangleAlert className="size-5" strokeWidth={1.75} />
+                  </span>
+                  <p className="mt-4 leading-relaxed text-ink">{challenge}</p>
+                  <span
+                    className="pointer-events-none absolute right-5 top-5 font-display text-sm tabular-nums text-muted"
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </Reveal>
       </section>
@@ -113,7 +139,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
                     <Icon name={cap.icon} className="size-4.5" />
                   </span>
                   <h3 className="mt-4 font-display text-base font-medium text-ink">{cap.title}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted body-justify">{cap.promise}</p>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{cap.promise}</p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-blue-ink">
                     Explore
                     <ArrowUpRight
@@ -150,7 +176,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
                 </span>
                 <div>
                   <h3 className="font-display text-base font-medium text-white">{item.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/50 body-justify">{item.body}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/50">{item.body}</p>
                 </div>
               </li>
             ))}

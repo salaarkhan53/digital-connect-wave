@@ -40,7 +40,7 @@ export function StatRow() {
                 )}
               </p>
               <h3 className="mt-4 font-display text-sm font-medium text-ink">{stat.label}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted body-justify">{stat.detail}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted">{stat.detail}</p>
             </li>
           ))}
         </ul>

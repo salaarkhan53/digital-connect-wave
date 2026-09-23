@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowUpRight, ShieldAlert } from 'lucide-react';
 import { complianceItems } from '@/content/compliance';
 import { kpis } from '@/content/kpis';
 import { Icon } from '@/components/ui/Icon';
@@ -35,7 +37,7 @@ export default function CompliancePage() {
                     <Icon name={item.icon} className="size-5" />
                   </span>
                   <span
-                    className="font-display text-sm font-medium tabular-nums text-blue-ink/40"
+                    className="font-display text-sm font-medium tabular-nums text-muted"
                     aria-hidden="true"
                   >
                     {String(i + 1).padStart(2, '0')}
@@ -66,7 +68,7 @@ export default function CompliancePage() {
                 className="rounded-2xl border border-[color:var(--color-hairline)] bg-white p-6"
               >
                 <h3 className="font-display text-base font-medium text-ink">{kpi.label}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{kpi.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{kpi.body}</p>
               </li>
             ))}
           </ul>
@@ -74,22 +76,65 @@ export default function CompliancePage() {
       </section>
 
       {/* ------------------------------------------------------ the caveat */}
-      <section className="bg-void">
-        <Reveal className="shell section">
+      <section className="relative isolate overflow-hidden bg-void">
+        <div
+          className="grid-lines absolute inset-0 -z-10 opacity-40 [mask-image:radial-gradient(70%_70%_at_50%_50%,#000,transparent)]"
+          aria-hidden="true"
+        />
+
+        <Reveal className="shell section-tight">
+          {/*
+            This is the most important paragraph on the page, so it is set as a
+            statement rather than centred body copy floating in a dark band. The
+            heading carries the weight; the detail sits beside it.
+          */}
           <div
             data-reveal
-            className="mx-auto max-w-3xl rounded-2xl border border-white/10 bg-surface/60 p-8 text-center"
+            className="relative overflow-hidden rounded-3xl border border-white/12 bg-surface/50"
           >
-            <h2 className="font-display text-xl font-medium text-white">
-              What we are not claiming
-            </h2>
-            <p className="mt-4 leading-relaxed text-white/55">
-              Everything above describes how we work, not a certificate hanging on
-              a wall. If your procurement process needs a formal attestation such as
-              HIPAA, SOC 2 or PCI DSS, ask us directly and we will tell you
-              plainly what we hold and what we do not. We would rather lose a deal than
-              imply something we cannot evidence.
-            </p>
+            <span
+              className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-blue via-spark to-blue/20"
+              aria-hidden="true"
+            />
+
+            <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_1.35fr] lg:gap-14">
+              <div>
+                <span
+                  className="flex size-12 items-center justify-center rounded-2xl border border-blue/25 bg-blue/10 text-blue-bright"
+                  aria-hidden="true"
+                >
+                  <ShieldAlert className="size-6" strokeWidth={1.5} />
+                </span>
+                <h2 className="mt-5 text-[length:var(--text-h3)] font-semibold text-white">
+                  What we are not claiming
+                </h2>
+              </div>
+
+              <div>
+                <p className="body-justify leading-relaxed text-white/70">
+                  Everything above describes how we work, not a certificate
+                  hanging on a wall. If your procurement process needs a formal
+                  attestation such as HIPAA, SOC 2 or PCI DSS, ask us directly
+                  and we will tell you plainly what we hold and what we do not.
+                </p>
+                <p className="mt-4 font-display text-[length:var(--text-lede)] leading-relaxed text-white">
+                  We would rather lose a deal than imply something we cannot
+                  evidence.
+                </p>
+
+                <Link
+                  href="/contact"
+                  className="group mt-7 inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-spark"
+                >
+                  Ask us what we hold
+                  <ArrowUpRight
+                    className="size-4 transition-transform duration-[280ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+            </div>
           </div>
         </Reveal>
       </section>

@@ -94,7 +94,7 @@ export function Process() {
                 </span>
                 <span className="font-display text-lg font-medium text-ink">{step.title}</span>
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted body-justify">{step.detail}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{step.detail}</p>
 
               {step.image && (
                 /* A fixed height, not an aspect ratio: this list also runs on
@@ -161,7 +161,7 @@ export function Process() {
                     >
                       {step.title}
                     </button>
-                    <p className="max-w-xs text-sm leading-relaxed text-muted body-justify">{step.summary}</p>
+                    <p className="max-w-xs text-sm leading-relaxed text-muted">{step.summary}</p>
                   </li>
                 );
               })}

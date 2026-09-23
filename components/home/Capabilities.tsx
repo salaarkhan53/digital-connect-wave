@@ -43,7 +43,7 @@ export function Capabilities() {
                 <h3 className="relative mt-5 font-display text-lg font-medium text-ink">
                   {cap.title}
                 </h3>
-                <p className="relative mt-2.5 flex-1 text-sm leading-relaxed text-muted body-justify">
+                <p className="relative mt-2.5 flex-1 text-sm leading-relaxed text-muted">
                   {cap.promise}
                 </p>
 

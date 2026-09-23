@@ -99,7 +99,7 @@ export default function AboutPage() {
                 <h3 className="mt-3 font-display text-base font-medium text-white">
                   {entry.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/50 body-justify">{entry.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/50">{entry.body}</p>
               </li>
             ))}
           </ol>
@@ -129,7 +129,7 @@ export default function AboutPage() {
                   {i + 1}
                 </span>
                 <h3 className="mt-4 font-display text-base font-medium text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted body-justify">{step.detail}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{step.detail}</p>
               </li>
             ))}
           </ol>
@@ -148,13 +148,13 @@ export default function AboutPage() {
           <ol className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {principles.map((principle, i) => (
               <li key={principle.title} data-reveal>
-                <p className="font-display text-sm font-medium tabular-nums text-blue-ink/40" aria-hidden="true">
+                <p className="font-display text-sm font-medium tabular-nums text-muted" aria-hidden="true">
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className="mt-3 font-display text-lg font-medium text-ink">
                   {principle.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted body-justify">{principle.body}</p>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted">{principle.body}</p>
               </li>
             ))}
           </ol>

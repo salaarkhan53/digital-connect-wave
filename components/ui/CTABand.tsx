@@ -7,9 +7,10 @@ import { asset } from '@/lib/asset';
 /**
  * The closing call to action, at the foot of every page.
  *
- * A contained panel rather than a full-bleed band: at full width the copy sat
- * marooned in the middle of a very wide dark strip, and the artwork behind it
- * only reads as a composition when it has edges.
+ * The artwork runs the full width of the band while the copy stays on a narrow
+ * measure. Held as a contained panel it read as an island: the copy was the
+ * right width, but the dark margin around it was dead space on any wide screen.
+ * Full-bleed keeps the measure and removes the void.
  */
 export function CTABand({
   title = "Let's talk outcomes.",
@@ -19,46 +20,62 @@ export function CTABand({
   lede?: string;
 }) {
   return (
-    <section className="border-t border-white/10 bg-void py-12 md:py-16">
-      <Reveal className="shell">
-        <div
+    <section className="relative isolate overflow-hidden border-t border-white/10">
+      <Image
+        src={asset('/brand/cta.webp')}
+        alt=""
+        fill
+        sizes="100vw"
+        aria-hidden="true"
+        className="-z-20 object-cover"
+      />
+      {/*
+        The artwork is brightest through its upper middle, exactly where the
+        heading sits, so this darkens it enough to keep white type clear of it
+        without flattening the waves. It also deepens toward the edges, which
+        stops the band fighting the footer below it.
+      */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(70% 90% at 50% 45%, rgb(5 7 14 / 0.42), rgb(5 7 14 / 0.86) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* The mark, barely lit, anchored off the right edge as texture. */}
+      <Image
+        src={asset('/brand/symbol-bg.webp')}
+        alt=""
+        width={480}
+        height={296}
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-20 top-1/2 -z-10 w-[min(34rem,55%)] max-w-none -translate-y-1/2 opacity-[0.09] select-none"
+      />
+
+      <Reveal className="shell py-16 text-center md:py-20">
+        <h2
           data-reveal
-          className="relative isolate mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/12 px-6 py-12 text-center sm:px-10 md:py-14"
+          className="mx-auto max-w-2xl text-[length:var(--text-h1)] font-semibold text-white drop-shadow-[0_2px_14px_rgb(3_10_28/0.65)]"
         >
-          <Image
-            src={asset('/brand/cta.webp')}
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 56rem, 100vw"
-            aria-hidden="true"
-            className="-z-20 object-cover"
-          />
-          {/*
-            The artwork is brightest through its upper middle, exactly where the
-            heading sits. This darkens it enough to keep white type clear of it
-            without flattening the waves.
-          */}
-          <div
-            className="absolute inset-0 -z-10 bg-void/45"
-            aria-hidden="true"
-          />
+          {title}
+        </h2>
+        <p
+          data-reveal
+          className="mx-auto mt-5 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-white/80"
+        >
+          {lede}
+        </p>
 
-          <h2 className="mx-auto max-w-2xl text-[length:var(--text-h1)] font-semibold text-white drop-shadow-[0_2px_12px_rgb(3_10_28/0.6)]">
-            {title}
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-white/80">
-            {lede}
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Button href="/contact">Start a conversation</Button>
-            <a
-              href={contact.phoneHref}
-              className="inline-flex min-h-[44px] items-center rounded-full px-5 py-3 text-sm font-medium text-white/85 transition-colors duration-[160ms] hover:text-spark"
-            >
-              or call {contact.phoneDisplay}
-            </a>
-          </div>
+        <div data-reveal className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Button href="/contact">Start a conversation</Button>
+          <a
+            href={contact.phoneHref}
+            className="inline-flex min-h-[44px] items-center rounded-full px-5 py-3 text-sm font-medium text-white/85 transition-colors duration-[160ms] hover:text-spark"
+          >
+            or call {contact.phoneDisplay}
+          </a>
         </div>
       </Reveal>
     </section>

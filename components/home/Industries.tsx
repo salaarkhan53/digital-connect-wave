@@ -57,7 +57,7 @@ export function Industries() {
                         aria-hidden="true"
                       />
                     </span>
-                    <span className="mt-1 block max-w-xl text-sm leading-relaxed text-white/55 body-justify">
+                    <span className="mt-1 block max-w-xl text-sm leading-relaxed text-white/55">
                       {industry.summary}
                     </span>
                   </span>
@@ -86,7 +86,7 @@ export function Industries() {
               <p className="font-display text-xl font-medium text-white">
                 {industries[active].title}
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/60 body-justify">
+              <p className="mt-2 text-sm leading-relaxed text-white/60">
                 {industries[active].summary}
               </p>
             </div>

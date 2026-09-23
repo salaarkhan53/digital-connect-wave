@@ -43,7 +43,7 @@ export default function IndustriesPage() {
                     <h2 className="font-display text-lg font-medium text-white">
                       {industry.title}
                     </h2>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/50 body-justify">
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/50">
                       {industry.summary}
                     </p>
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-spark">

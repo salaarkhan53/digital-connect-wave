@@ -103,8 +103,17 @@ change one gate, change the other.
 
 **Body prose is justified.** The `.body-justify` utility carries it, applied to
 the descriptive paragraph in each section and never to labels, figures or
-centred text. It reverts to left-aligned below 480px, where the column is too
-narrow to justify without visible gaps.
+centred text. It reverts to left-aligned below 480px.
+
+Justification needs a wide measure. Every `text-sm` paragraph here sits in a
+card or a narrow column, where justifying opens rivers instead of tidying the
+edge, so those are deliberately left ragged. Wide body copy is base or lede
+size and keeps it. If you add `body-justify` to something small, look at it at
+1440px before keeping it.
+
+**Decorative numerals use `text-muted`, not a faded brand tint.** Opacity low
+enough to read as secondary cannot clear 4.5:1 on a light band; `text-blue-ink/25`
+measured 1.45:1. `text-muted` clears it at 5.65:1.
 
 ---
 

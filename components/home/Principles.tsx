@@ -16,7 +16,7 @@ export function Principles() {
           {principles.map((principle, i) => (
             <li key={principle.title} data-reveal className="group">
               <p
-                className="font-display text-sm font-medium tabular-nums text-blue-ink/40 transition-colors duration-[280ms] group-hover:text-blue-ink"
+                className="font-display text-sm font-medium tabular-nums text-muted transition-colors duration-[280ms] group-hover:text-blue-ink"
                 aria-hidden="true"
               >
                 {String(i + 1).padStart(2, '0')}
@@ -24,7 +24,7 @@ export function Principles() {
               <h3 className="mt-3 font-display text-lg font-medium text-ink">
                 {principle.title}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted body-justify">{principle.body}</p>
+              <p className="mt-2.5 text-sm leading-relaxed text-muted">{principle.body}</p>
             </li>
           ))}
         </ol>
