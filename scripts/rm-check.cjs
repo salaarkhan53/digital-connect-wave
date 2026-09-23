@@ -5,7 +5,7 @@ const {chromium}=require('playwright-core');
   for(const rm of ['reduce','no-preference']){
     const ctx=await b.newContext({viewport:{width:1440,height:900},reducedMotion:rm});
     const p=await ctx.newPage();
-    await p.goto('http://localhost:3110/',{waitUntil:'networkidle',timeout:60000});
+    await p.goto((process.env.URL||'http://localhost:3000/'),{waitUntil:'networkidle',timeout:60000});
     await p.waitForTimeout(2500);
     const r=await p.evaluate(()=>{
       const els=[...document.querySelectorAll('[data-reveal]')];

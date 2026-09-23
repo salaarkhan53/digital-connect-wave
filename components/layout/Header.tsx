@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { nav } from '@/content/site';
 import { contact } from '@/content/contact';
 import { Wordmark } from '@/components/brand/Wordmark';
 import { Button } from '@/components/ui/Button';
+import { MenuArt } from '@/components/art/MenuArt';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -99,7 +100,7 @@ export function Header() {
           onBlurCapture={onBlurCapture}
           className="hidden items-center gap-1 lg:flex"
         >
-          {nav.map((item) => {
+          {nav.map((item, navIndex) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             if (!item.children) {
               return (
@@ -170,12 +171,19 @@ export function Header() {
                       {item.featured && (
                         <Link
                           href={item.featured.href}
-                          className="mesh-field group relative flex flex-col justify-end overflow-hidden rounded-xl border border-white/10 p-5 transition-colors duration-[280ms] hover:border-spark/40"
+                          className="group relative flex min-h-[15rem] flex-col justify-end overflow-hidden rounded-xl border border-white/10 bg-surface p-5 transition-colors duration-[280ms] hover:border-spark/45"
                         >
-                          <span className="font-display text-lg text-white">
+                          <MenuArt seed={navIndex} />
+
+                          <span className="relative flex items-center gap-1.5 font-display text-lg text-white">
                             {item.featured.label}
+                            <ArrowUpRight
+                              className="size-4 -translate-x-1 text-spark opacity-0 transition-all duration-[280ms] group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:transition-none"
+                              strokeWidth={2.5}
+                              aria-hidden="true"
+                            />
                           </span>
-                          <span className="mt-1.5 text-xs leading-relaxed text-white/55">
+                          <span className="relative mt-1.5 text-xs leading-relaxed text-white/60">
                             {item.featured.blurb}
                           </span>
                         </Link>

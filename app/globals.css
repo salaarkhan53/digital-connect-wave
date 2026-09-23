@@ -334,3 +334,60 @@ html[data-js] [data-headline] {
     opacity: 0.35;
   }
 }
+
+/* ------------------------------------------------- mega-menu artwork */
+
+/* Waves rippling out of the mark in the featured tile. */
+@keyframes menu-ripple {
+  0% {
+    transform: scale(0.35);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.menu-ripple {
+  transform-origin: 50px 50px;
+  transform-box: view-box;
+  animation: menu-ripple 3.9s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+/*
+ * The mark breathing underneath them.
+ *
+ * This animates `scale`, not `transform`. Tailwind v4 compiles its translate
+ * utilities to the independent `translate` property, so a keyframe that sets
+ * `transform: translate(-50%, -50%)` composes on top of the centring rather
+ * than replacing it — the element ends up shifted a full half-width off. The
+ * independent transform properties compose cleanly instead.
+ */
+@keyframes menu-drift {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.06;
+  }
+}
+
+.menu-drift {
+  animation: menu-drift 11s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-ripple {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .menu-drift {
+    animation: none;
+  }
+}

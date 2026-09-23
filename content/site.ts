@@ -65,6 +65,12 @@ export const nav: NavItem[] = [
       { label: 'Compliance', href: '/compliance', blurb: 'Process, monitoring and audit trail.' },
       { label: 'Careers', href: '/careers', blurb: 'Open roles and how we promote.' },
     ],
+    // Without this the Company panel's second column renders empty.
+    featured: {
+      label: 'Talk to us',
+      href: '/contact',
+      blurb: 'Tell us the campaign, the volume and the standard you are held to.',
+    },
   },
   { label: 'Contact', href: '/contact' },
 ];
