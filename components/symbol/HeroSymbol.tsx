@@ -19,9 +19,20 @@ export type SymbolSource = "webgl" | "frames" | "video";
 // import needs no loading state of its own.
 const SymbolScene = dynamic(() => import("./SymbolScene"), { ssr: false });
 
+/*
+ * `farthest-side`, not `closest-side`. A closest-side gradient inscribes a
+ * circle in the canvas, so on a box wider than it is tall it cut the tips off
+ * the lemniscate rather than only fading the empty margin around it; that is
+ * half of why the mark read as small. Farthest-side gives an ellipse that
+ * follows the box, and holding it opaque to 82% still leaves a fade band
+ * inside the canvas edge, which is what hides the uniform lift bloom leaves
+ * across the framebuffer.
+ */
+const MASK = "radial-gradient(farthest-side at 50% 50%, #000 82%, transparent 100%)";
+
 const SYMBOL_MASK: React.CSSProperties = {
-  WebkitMaskImage: "radial-gradient(closest-side, #000 62%, transparent 96%)",
-  maskImage: "radial-gradient(closest-side, #000 62%, transparent 96%)",
+  WebkitMaskImage: MASK,
+  maskImage: MASK,
 };
 
 function StaticMark() {
@@ -71,11 +82,31 @@ function useWebglSupport() {
 
       try {
         const canvas = document.createElement("canvas");
-        return Boolean(
-          canvas.getContext("webgl2") ??
-            canvas.getContext("webgl") ??
-            canvas.getContext("experimental-webgl"),
-        );
+        const gl = (canvas.getContext("webgl2") ??
+          canvas.getContext("webgl") ??
+          canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
+
+        if (!gl) return false;
+
+        /*
+         * A WebGL context is not the same thing as a GPU. Where hardware
+         * acceleration is off or unavailable the browser falls back to a
+         * software rasteriser, and this scene is fill-rate bound: measured on
+         * SwiftShader it manages 4.5fps at the mark's old size and 2fps now
+         * that the mark is nearly twice as wide. Those visitors are better
+         * served by the static PNG, which is the same symbol without the
+         * motion, than by a slideshow that also blocks their main thread.
+         */
+        const info = gl.getExtension("WEBGL_debug_renderer_info");
+        const renderer = info
+          ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL) ?? "")
+          : "";
+
+        if (/swiftshader|llvmpipe|softpipe|basic render|software/i.test(renderer)) {
+          return false;
+        }
+
+        return true;
       } catch {
         return false;
       }

@@ -117,9 +117,30 @@ export function Hero() {
         </div>
 
         {/* ----------------------------------------------------- symbol */}
+        {/*
+          From `lg` the mark leaves the grid entirely and is positioned against
+          the section instead.
+
+          Held in its column it rendered at barely two thirds of the width
+          beside the copy. Simply widening the column is not the fix: a grid
+          track sized to the mark starves the headline, which at 1920 broke
+          "Connecting" across three lines. Out of flow it can be as large as
+          the section allows and still cannot touch the copy's measure.
+
+          The 1.3 ratio is the mark's own: it measures 2.06 by 1.59 world
+          units. Matching the box to it means the mask's horizontal and
+          vertical limits bind at the same camera distance, so neither axis is
+          wasting room the other one needs. Sized from width, not height,
+          because driven by height it outgrows the horizontal space on a 1366
+          screen and slides under the headline; `max-h` then catches the short
+          wide windows where 1.3 of the width would be taller than the hero.
+
+          `overflow-hidden` on the section catches the bleed past the right
+          gutter, which is intentional.
+        */}
         <div
           data-stage
-          className="relative mx-auto aspect-[4/3] max-h-[26vh] w-full max-w-[34rem] sm:max-h-[40vh] lg:aspect-square lg:max-h-[62vh] lg:max-w-none"
+          className="relative mx-auto aspect-[4/3] max-h-[26vh] w-full max-w-[34rem] sm:max-h-[40vh] lg:absolute lg:inset-y-0 lg:right-0 lg:my-auto lg:aspect-[1.3/1] lg:max-h-[88vh] lg:w-[min(51vw,64rem)] lg:max-w-none"
         >
           <HeroSymbol className="absolute inset-0" />
         </div>

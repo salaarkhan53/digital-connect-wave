@@ -198,11 +198,27 @@ export default function SymbolScene({
   return (
     <Canvas
       className={className}
-      // Capped at 1.5: bloom is the expensive pass here and the difference is
-      // invisible next to its cost on high-DPI screens.
-      dpr={[1, 1.5]}
+      /*
+       * Capped at 1.25, down from 1.5. This scene is fill-rate bound and the
+       * mark is now nearly twice as wide, so backing-store pixels rose by
+       * 1.9x; on a high-DPI screen a 1.5 cap would have squared that. A soft
+       * glowing wireframe under a bloom pass shows no visible difference
+       * between the two.
+       */
+      dpr={[1, 1.25]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      camera={{ position: [0, 0, 3.6], fov: 42 }}
+      /*
+       * Pulled in from 3.6, which was framing the mark at roughly two thirds
+       * of the canvas it was given and is most of why it read as small.
+       *
+       * 2.52 is as close as it goes. The mark measures 2.06 by 1.59 world
+       * units, the vertical field of view shows 0.768 * z of them, and the
+       * mask holds only the inner 82% at full opacity: 1.59 / (0.768 * 0.82)
+       * is 2.52, and with the canvas cut to the mark's own 1.3 ratio the
+       * horizontal limit lands on the same number. Any closer and the tips
+       * start dimming, then crop outright.
+       */
+      camera={{ position: [0, 0, 2.52], fov: 42 }}
       // No render loop at all when motion is off, or when the mark has been
       // scrolled past — there is no reason to burn frames on an offscreen
       // canvas while someone reads the rest of the page.
@@ -227,11 +243,13 @@ export default function SymbolScene({
           luminanceSmoothing={0.9}
           mipmapBlur
           kernelSize={KernelSize.MEDIUM}
-          // The bloom pass is a blur, so running it at half resolution is
-          // invisible in the result and roughly quarters its cost.
+          // The bloom pass is a blur, so running it below full resolution is
+          // invisible in the result. 0.4 rather than 0.5 buys back most of
+          // what the larger canvas costs: a third fewer pixels through the
+          // most expensive pass in the scene.
           resolutionX={Resolution.AUTO_SIZE}
           resolutionY={Resolution.AUTO_SIZE}
-          resolutionScale={0.5}
+          resolutionScale={0.4}
         />
       </EffectComposer>
     </Canvas>
