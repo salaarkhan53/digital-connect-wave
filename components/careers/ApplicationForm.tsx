@@ -195,7 +195,7 @@ export function ApplicationForm() {
       onSubmit={onSubmit}
       noValidate
       encType="multipart/form-data"
-      className="rounded-2xl border border-[color:var(--color-hairline)] bg-white p-6 sm:p-8"
+      className="glow-edge rounded-2xl border bg-white p-6 sm:p-8"
     >
       <input type="hidden" name="access_key" value={ACCESS_KEY} />
       <input type="hidden" name="from_name" value="Digital Connect Wave careers" />

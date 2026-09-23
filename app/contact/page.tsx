@@ -89,7 +89,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-2xl border border-[color:var(--color-hairline)]">
+              <div className="glow-edge overflow-hidden rounded-2xl border">
                 <iframe
                   src={mapSrc}
                   title={`Map showing ${contact.addressOneLine}`}

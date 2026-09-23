@@ -247,6 +247,42 @@ p {
   background-size: 64px 64px;
 }
 
+/*
+ * A quiet blue edge for the handful of surfaces on a light band that are
+ * actually live rather than just read: the map and the two forms. Defined once
+ * so the three cannot drift apart.
+ *
+ * The element supplies its own `border` width; this only colours it and adds
+ * the glow. Static rather than pulsing: these sit under a cursor for minutes
+ * at a time while someone fills them in, and a breathing border there is a
+ * distraction rather than a flourish. It lifts on focus instead, so it
+ * responds when the form is actually in use.
+ */
+.glow-edge {
+  border-color: rgb(11 112 224 / 0.38);
+  box-shadow:
+    0 0 0 1px rgb(11 112 224 / 0.07),
+    0 0 22px -8px rgb(46 168 255 / 0.55),
+    0 12px 44px -30px rgb(11 112 224 / 0.5);
+  transition:
+    border-color var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.glow-edge:focus-within {
+  border-color: rgb(11 112 224 / 0.55);
+  box-shadow:
+    0 0 0 1px rgb(11 112 224 / 0.12),
+    0 0 30px -6px rgb(46 168 255 / 0.7),
+    0 12px 44px -28px rgb(11 112 224 / 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-edge {
+    transition: none;
+  }
+}
+
 /* Hairline that fades at both ends — used between dark sections. */
 .rule-fade {
   height: 1px;
