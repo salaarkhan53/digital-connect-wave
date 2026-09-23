@@ -13,6 +13,7 @@ const OUT = 'public/brand';
 const APP = 'app';
 
 const SYMBOL = `${SRC}/symbol.png`;
+const CTA = `${SRC}/Let's talk.png`;
 
 await mkdir(OUT, { recursive: true });
 
@@ -85,6 +86,16 @@ await mkdir(OUT, { recursive: true });
   await sharp(cut).resize({ width: 320 }).webp({ quality: 80, effort: 6 })
     .toFile(`${OUT}/symbol-sm.webp`);
 }
+
+/*
+ * Backdrop for the closing call to action. It is a wide, soft gradient field,
+ * so it survives heavy compression: quality 62 is indistinguishable here and a
+ * third of the size that 80 would cost.
+ */
+await sharp(CTA)
+  .resize({ width: 1400 })
+  .webp({ quality: 62, effort: 6 })
+  .toFile(`${OUT}/cta.webp`);
 
 // Square app icons: the symbol centred on the brand void colour.
 async function square(size, file) {

@@ -4,7 +4,13 @@ import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { asset } from '@/lib/asset';
 
-/** The closing call to action. Reused at the foot of every page. */
+/**
+ * The closing call to action, at the foot of every page.
+ *
+ * A contained panel rather than a full-bleed band: at full width the copy sat
+ * marooned in the middle of a very wide dark strip, and the artwork behind it
+ * only reads as a composition when it has edges.
+ */
 export function CTABand({
   title = "Let's talk outcomes.",
   lede = 'Tell us the campaign, the volume and the standard you are held to. We will tell you honestly whether we are the right team for it.',
@@ -13,37 +19,46 @@ export function CTABand({
   lede?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden border-t border-white/10 bg-void">
-      {/* The mark rising out of the bottom edge, barely lit. */}
-      <Image
-        src={asset("/brand/symbol-bg.webp")}
-        alt=""
-        width={480}
-        height={296}
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 left-1/2 -z-10 w-[min(64rem,130%)] max-w-none -translate-x-1/2 opacity-[0.1] blur-[1px] select-none"
-      />
-      <div className="mesh-field absolute inset-0 -z-20" aria-hidden="true" />
-
-      <Reveal className="shell section text-center">
-        <h2
+    <section className="border-t border-white/10 bg-void py-16 md:py-20">
+      <Reveal className="shell">
+        <div
           data-reveal
-          className="mx-auto max-w-3xl text-[length:var(--text-h1)] font-semibold text-white"
+          className="relative isolate mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/12 px-6 py-14 text-center sm:px-10 md:py-16"
         >
-          {title}
-        </h2>
-        <p data-reveal className="mx-auto mt-6 max-w-xl text-[length:var(--text-lede)] text-white/55">
-          {lede}
-        </p>
+          <Image
+            src={asset('/brand/cta.webp')}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 56rem, 100vw"
+            aria-hidden="true"
+            className="-z-20 object-cover"
+          />
+          {/*
+            The artwork is brightest through its upper middle, exactly where the
+            heading sits. This darkens it enough to keep white type clear of it
+            without flattening the waves.
+          */}
+          <div
+            className="absolute inset-0 -z-10 bg-void/45"
+            aria-hidden="true"
+          />
 
-        <div data-reveal className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Button href="/contact">Start a conversation</Button>
-          <a
-            href={contact.phoneHref}
-            className="inline-flex min-h-[44px] items-center rounded-full px-5 py-3 text-sm font-medium text-white/70 transition-colors duration-[160ms] hover:text-spark"
-          >
-            or call {contact.phoneDisplay}
-          </a>
+          <h2 className="mx-auto max-w-2xl text-[length:var(--text-h1)] font-semibold text-white drop-shadow-[0_2px_12px_rgb(3_10_28/0.6)]">
+            {title}
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[length:var(--text-lede)] leading-relaxed text-white/80">
+            {lede}
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <Button href="/contact">Start a conversation</Button>
+            <a
+              href={contact.phoneHref}
+              className="inline-flex min-h-[44px] items-center rounded-full px-5 py-3 text-sm font-medium text-white/85 transition-colors duration-[160ms] hover:text-spark"
+            >
+              or call {contact.phoneDisplay}
+            </a>
+          </div>
         </div>
       </Reveal>
     </section>

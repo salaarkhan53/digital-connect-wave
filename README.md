@@ -86,7 +86,8 @@ Everything else (capabilities, careers, the mega-menu tile) stays on generated
 art: gradient fields and contour lines from the logo's own language.
 
 Run `node scripts/generate-industry-images.mjs` to re-derive the optimized
-industry photos from their sources.
+industry photos from their sources, and `npm run brand:assets` for the symbol
+and the closing call-to-action backdrop.
 
 **No em dashes in any rendered copy.** Use a colon, a comma or a full stop.
 `npm run build` then grep `out/**/*.html` for the character to confirm.
