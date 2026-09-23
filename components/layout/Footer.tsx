@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import { footerNav, site, socials } from '@/content/site';
@@ -6,7 +5,6 @@ import { contact } from '@/content/contact';
 import { Wordmark } from '@/components/brand/Wordmark';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { Reveal } from '@/components/ui/Reveal';
-import { asset } from '@/lib/asset';
 
 /**
  * The three ways to reach us, as a row rather than a stacked list.
@@ -47,28 +45,28 @@ const cardShell =
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden border-t border-white/10 bg-surface/40">
-      {/*
-        A brand-coloured light travelling along the top edge. The footer also
-        carries a border and a slightly lifted background: without them it sat
-        dark-on-dark under any page ending in a dark section, and the boundary
-        disappeared entirely.
-      */}
+    /*
+      Flat and near-black, where the call to action above it is bright blue.
+      The two used to share a palette, a mesh field and the same mark bled off
+      the right edge, so every page ended in two blue slabs that read as one
+      long stretch of nothing. Dropping the artwork here is what makes the
+      boundary between them an edge, and the CTA the thing that carries the
+      colour.
+    */
+    <footer className="relative isolate overflow-hidden bg-void">
+      {/* A brand-coloured light travelling along the top edge: the footer's
+          own signature, and the only motion it needs. */}
       <div className="relative h-px w-full overflow-hidden bg-white/10" aria-hidden="true">
         <span className="footer-sweep absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-spark to-transparent" />
       </div>
 
-      {/* The mark as texture, anchored right so it never sits behind a block of
-          text and never dictates how tall the footer has to be. */}
-      <Image
-        src={asset('/brand/symbol-bg.webp')}
-        alt=""
-        width={480}
-        height={296}
+      {/* Ruled lines rather than a picture, fading out before they reach the
+          text. A different visual language from the band above, and nothing
+          that can be cropped awkwardly by the edge of the viewport. */}
+      <div
+        className="grid-lines pointer-events-none absolute inset-0 -z-10 opacity-[0.28] [mask-image:linear-gradient(to_bottom,#000,transparent_65%)]"
         aria-hidden="true"
-        className="pointer-events-none absolute -right-28 -top-20 -z-10 w-[min(44rem,85%)] max-w-none opacity-[0.06] select-none"
       />
-      <div className="mesh-field absolute inset-0 -z-20 opacity-50" aria-hidden="true" />
 
       <Reveal className="shell py-10 md:py-12">
         {/* ------------------------------------------------- contact strip */}

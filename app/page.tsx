@@ -9,7 +9,6 @@ import { SavingsCalculator } from '@/components/home/SavingsCalculator';
 import { Process } from '@/components/home/Process';
 import { Principles } from '@/components/home/Principles';
 import { Coverage } from '@/components/home/Coverage';
-import { CareersTeaser } from '@/components/home/CareersTeaser';
 import { CTABand } from '@/components/ui/CTABand';
 
 export default function HomePage() {
@@ -33,9 +32,8 @@ export default function HomePage() {
       <Process />
       <Principles />
 
-      {/* dark — coverage, people, close */}
+      {/* dark — coverage and close */}
       <Coverage />
-      <CareersTeaser />
       <CTABand />
     </>
   );

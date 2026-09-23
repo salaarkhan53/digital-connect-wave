@@ -62,7 +62,6 @@ export const nav: NavItem[] = [
     children: [
       { label: 'About', href: '/about', blurb: 'Who we are and what we hold ourselves to.' },
       { label: 'Compliance', href: '/compliance', blurb: 'Process, monitoring and audit trail.' },
-      { label: 'Careers', href: '/careers', blurb: 'Open roles and how we promote.' },
     ],
     // Without this the Company panel's second column renders empty.
     featured: {
@@ -71,7 +70,14 @@ export const nav: NavItem[] = [
       blurb: 'Tell us the campaign, the volume and the standard you are held to.',
     },
   },
-  { label: 'Contact', href: '/contact' },
+  /*
+   * Careers rather than Contact. Contact and the "Let's talk" button landed on
+   * the same page, so one of the five slots was spent twice; Careers had no
+   * top-level route of its own and was buried in the Company panel. Contact is
+   * still reachable from that button, the Company panel's featured tile and
+   * the footer.
+   */
+  { label: 'Careers', href: '/careers' },
 ];
 
 /** Footer link groups. */
