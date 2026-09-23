@@ -7,6 +7,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -24,7 +25,7 @@ export default function CareersPage() {
       />
 
       {/* ---------------------------------------------------- why join us */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <SectionHeading eyebrow="Why here" title="What you can expect from us." />
 
@@ -37,7 +38,7 @@ export default function CareersPage() {
             ))}
           </ul>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* -------------------------------------------------------- the roles */}
       <section className="bg-void" id="roles">

@@ -63,12 +63,11 @@ export const nav: NavItem[] = [
       { label: 'About', href: '/about', blurb: 'Who we are and what we hold ourselves to.' },
       { label: 'Compliance', href: '/compliance', blurb: 'Process, monitoring and audit trail.' },
     ],
-    // Without this the Company panel's second column renders empty.
-    featured: {
-      label: 'Talk to us',
-      href: '/contact',
-      blurb: 'Tell us the campaign, the volume and the standard you are held to.',
-    },
+    /*
+     * No featured tile. The panel drops to a single column and a narrower box
+     * when one is absent, so About and Compliance sit together rather than
+     * leaving half of a 56rem panel empty.
+     */
   },
   /*
    * Careers rather than Contact. Contact and the "Let's talk" button landed on

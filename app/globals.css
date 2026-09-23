@@ -83,15 +83,28 @@
  */
 @media (min-width: 1600px) {
   :root {
-    --shell: 88rem;
+    --shell: 94rem;
     --gutter: 2.5rem;
   }
 }
 
 @media (min-width: 2000px) {
   :root {
-    --shell: 96rem;
+    --shell: 108rem;
     --gutter: 3rem;
+  }
+}
+
+/*
+ * 2560 and up. 96rem still left 512px down each side of a 1440p monitor, which
+ * is the screen this was reported on. The cap does not disappear entirely:
+ * past this the frame is wide enough that growing it further only stretches
+ * card grids into thin strips.
+ */
+@media (min-width: 2400px) {
+  :root {
+    --shell: 122rem;
+    --gutter: 3.5rem;
   }
 }
 

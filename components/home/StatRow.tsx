@@ -1,6 +1,7 @@
 import { stats } from '@/content/stats';
 import { Counter } from '@/components/ui/Counter';
 import { Reveal } from '@/components/ui/Reveal';
+import { LightBand } from '@/components/ui/LightBand';
 
 /**
  * The headline figures. Scroll-snapped horizontally on small screens so the
@@ -10,7 +11,7 @@ import { Reveal } from '@/components/ui/Reveal';
  */
 export function StatRow() {
   return (
-    <section className="band-light" aria-label="Key figures">
+    <LightBand aria-label="Key figures">
       <Reveal className="shell section">
         <ul
           className="-mx-[var(--gutter)] flex snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-5"
@@ -45,6 +46,6 @@ export function StatRow() {
           ))}
         </ul>
       </Reveal>
-    </section>
+    </LightBand>
   );
 }

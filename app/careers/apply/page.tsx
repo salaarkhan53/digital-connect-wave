@@ -5,6 +5,7 @@ import { contact } from '@/content/contact';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { ApplicationForm } from '@/components/careers/ApplicationForm';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Apply',
@@ -33,7 +34,7 @@ export default function ApplyPage() {
         ]}
       />
 
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
             <div data-reveal>
@@ -79,7 +80,7 @@ export default function ApplyPage() {
             </aside>
           </div>
         </Reveal>
-      </section>
+      </LightBand>
     </>
   );
 }

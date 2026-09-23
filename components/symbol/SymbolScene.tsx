@@ -211,14 +211,17 @@ export default function SymbolScene({
        * Pulled in from 3.6, which was framing the mark at roughly two thirds
        * of the canvas it was given and is most of why it read as small.
        *
-       * 2.52 is as close as it goes. The mark measures 2.06 by 1.59 world
+       * 2.52 was the arithmetic limit: the mark measures 2.06 by 1.59 world
        * units, the vertical field of view shows 0.768 * z of them, and the
-       * mask holds only the inner 82% at full opacity: 1.59 / (0.768 * 0.82)
-       * is 2.52, and with the canvas cut to the mark's own 1.3 ratio the
-       * horizontal limit lands on the same number. Any closer and the tips
-       * start dimming, then crop outright.
+       * mask holds the inner 82% at full opacity, which puts the tips exactly
+       * on the boundary. Exactly on the boundary is too close in practice --
+       * the extremes sat in the first of the fade and read as clipped corners.
+       *
+       * 3.6 backs off by 30%, so the mark renders at 0.7 of that size with
+       * real margin inside the mask. It is still far larger than it was,
+       * because the canvas it sits in is now much bigger.
        */
-      camera={{ position: [0, 0, 2.52], fov: 42 }}
+      camera={{ position: [0, 0, 3.6], fov: 42 }}
       // No render loop at all when motion is off, or when the mark has been
       // scrolled past — there is no reason to burn frames on an offscreen
       // canvas while someone reads the rest of the page.

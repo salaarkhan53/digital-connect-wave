@@ -6,6 +6,7 @@ import { IndustryVisual } from '@/components/art/IndustryVisual';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Industries',
@@ -22,7 +23,7 @@ export default function IndustriesPage() {
         lede="Each one has its own objections, its own compliance load and its own idea of what a good call sounds like. We do not start from scratch on any of them."
       />
 
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry, i) => (
@@ -60,7 +61,7 @@ export default function IndustriesPage() {
             ))}
           </ul>
         </Reveal>
-      </section>
+      </LightBand>
 
       <CTABand />
     </>

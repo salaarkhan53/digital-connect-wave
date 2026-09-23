@@ -144,11 +144,17 @@ export function Header() {
                 <div
                   id={`menu-${item.label}`}
                   hidden={!expanded}
-                  className="absolute left-1/2 top-[calc(100%+0.5rem)] w-[min(56rem,90vw)] -translate-x-1/2"
+                  className={`absolute left-1/2 top-[calc(100%+0.5rem)] -translate-x-1/2 ${
+                    item.featured ? 'w-[min(56rem,90vw)]' : 'w-[min(32rem,90vw)]'
+                  }`}
                 >
                   <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface/95 shadow-[0_24px_60px_-12px_rgb(0_0_0/0.7)] backdrop-blur-xl">
-                    <div className="grid gap-6 p-6 md:grid-cols-[1.6fr_1fr]">
-                      <ul className="grid gap-1 sm:grid-cols-2">
+                    <div
+                      className={`grid gap-6 p-6 ${
+                        item.featured ? 'md:grid-cols-[1.6fr_1fr]' : ''
+                      }`}
+                    >
+                      <ul className={`grid gap-1 ${item.featured ? 'sm:grid-cols-2' : ''}`}>
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <Link

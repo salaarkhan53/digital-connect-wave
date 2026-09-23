@@ -12,6 +12,7 @@ import {
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
+import { LightBand } from '@/components/ui/LightBand';
 
 type Field = keyof SavingsInput;
 
@@ -70,7 +71,7 @@ export function SavingsCalculator() {
     `&rate=${input.inHouseRate}&target=${input.outsourcedRate}`;
 
   return (
-    <section className="band-light" aria-labelledby="savings-heading">
+    <LightBand aria-labelledby="savings-heading">
       <Reveal className="shell section">
         <SectionHeading
           eyebrow="Estimate"
@@ -190,6 +191,6 @@ export function SavingsCalculator() {
           </div>
         </div>
       </Reveal>
-    </section>
+    </LightBand>
   );
 }

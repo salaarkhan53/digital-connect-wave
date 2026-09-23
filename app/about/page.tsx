@@ -8,6 +8,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Counter } from '@/components/ui/Counter';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -25,7 +26,7 @@ export default function AboutPage() {
       />
 
       {/* ----------------------------------------------- mission / vision */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -80,7 +81,7 @@ export default function AboutPage() {
             ))}
           </ul>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* ------------------------------------------------------- timeline */}
       <section className="bg-void">
@@ -137,7 +138,7 @@ export default function AboutPage() {
       </section>
 
       {/* ----------------------------------------------------- principles */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <SectionHeading
             eyebrow="How we operate"
@@ -159,7 +160,7 @@ export default function AboutPage() {
             ))}
           </ol>
         </Reveal>
-      </section>
+      </LightBand>
 
       <CTABand />
     </>

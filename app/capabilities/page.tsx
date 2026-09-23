@@ -9,6 +9,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Capabilities',
@@ -31,7 +32,7 @@ export default function CapabilitiesPage() {
         duplicated the detail pages word for word and made it several times
         longer than it needed to be for no extra information.
       */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((cap, i) => (
@@ -74,7 +75,7 @@ export default function CapabilitiesPage() {
             ))}
           </ul>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* ----------------------------------------------------------- process */}
       <section className="bg-void">

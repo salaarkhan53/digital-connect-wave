@@ -11,6 +11,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
@@ -53,7 +54,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
         against the band edge, and any padding above it would push it down and
         break the overlap.
       */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell pb-[clamp(2.5rem,1.6rem+3.6vw,5rem)]">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
             {/*
@@ -140,7 +141,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
             </ul>
           </div>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* -------------------------------------------- applied capabilities */}
       <section className="band-mist">

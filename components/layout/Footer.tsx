@@ -5,6 +5,7 @@ import { contact } from '@/content/contact';
 import { Wordmark } from '@/components/brand/Wordmark';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { Reveal } from '@/components/ui/Reveal';
+import { ParticleField } from '@/components/art/ParticleField';
 
 /**
  * The three ways to reach us, as a row rather than a stacked list.
@@ -64,13 +65,27 @@ export function Footer() {
           text. A different visual language from the band above, and nothing
           that can be cropped awkwardly by the edge of the viewport. */}
       <div
-        className="grid-lines pointer-events-none absolute inset-0 -z-10 opacity-[0.28] [mask-image:linear-gradient(to_bottom,#000,transparent_65%)]"
+        className="grid-lines pointer-events-none absolute inset-0 -z-20 opacity-[0.22] [mask-image:linear-gradient(to_bottom,#000,transparent_65%)]"
         aria-hidden="true"
       />
 
+      {/*
+        A signal field over the ruled lines: points that drift, join up to
+        their neighbours and scatter out of the way of the cursor. The joined
+        variant, where the white bands get bare dots, so the footer reads as
+        its own thing rather than the same effect a third time.
+      */}
+      <ParticleField tone="dark" />
+
       <Reveal className="shell py-10 md:py-12">
         {/* ------------------------------------------------- contact strip */}
-        <ul className="grid gap-3 sm:grid-cols-3">
+        {/*
+          Two up until `lg`, not three. Three columns at tablet width left each
+          card around 230px, which truncated the email address to
+          "contact@digital..." — the one value in the footer that has to be
+          readable in full. The odd card out spans the pair.
+        */}
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 [&>li:last-child]:sm:col-span-2 [&>li:last-child]:lg:col-span-1">
           {channels.map((channel) => {
             const Icon = channel.icon;
             const inner = (
@@ -93,12 +108,14 @@ export function Footer() {
                       />
                     )}
                   </span>
-                  <span className="mt-1.5 block truncate font-display text-[0.95rem] font-medium text-white">
+                  {/* Wraps rather than truncates. Between 640 and 1024 the
+                      card is too narrow for the address on one line, and an
+                      email cut to "contact@digital..." is worse than an email
+                      on two lines. */}
+                  <span className="mt-1.5 block font-display text-[0.95rem] font-medium break-words text-white">
                     {channel.value}
                   </span>
-                  <span className="mt-0.5 block truncate text-xs text-white/45">
-                    {channel.note}
-                  </span>
+                  <span className="mt-0.5 block text-xs text-white/45">{channel.note}</span>
                 </span>
               </>
             );
@@ -154,7 +171,11 @@ export function Footer() {
                 data-reveal
                 className={orphan ? 'col-span-2 sm:col-span-1' : undefined}
               >
-                <h2 className="font-display text-[0.6875rem] font-medium uppercase tracking-[0.16em] text-white/45">
+                {/* Two points up from 11px, bold, and on the brand blue
+                    rather than dimmed white: these are the only labels in the
+                    footer and they were reading as the quietest thing in it.
+                    `blue-bright` clears 8:1 on this background. */}
+                <h2 className="font-display text-[0.855rem] font-bold uppercase tracking-[0.16em] text-blue-bright">
                   {group.title}
                 </h2>
                 <ul

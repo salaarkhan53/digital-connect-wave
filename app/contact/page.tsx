@@ -5,6 +5,7 @@ import { contact } from '@/content/contact';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { ContactForm } from '@/components/contact/ContactForm';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -22,7 +23,7 @@ export default function ContactPage() {
         lede="The more you can tell us about volume, hours and the standard you are held to, the more useful our first answer will be."
       />
 
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
             <div data-reveal>
@@ -100,7 +101,7 @@ export default function ContactPage() {
             </div>
           </div>
         </Reveal>
-      </section>
+      </LightBand>
     </>
   );
 }

@@ -1,10 +1,11 @@
 import { principles } from '@/content/principles';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { LightBand } from '@/components/ui/LightBand';
 
 export function Principles() {
   return (
-    <section className="band-light" aria-labelledby="principles-heading">
+    <LightBand aria-labelledby="principles-heading">
       <Reveal className="shell section">
         <SectionHeading
           eyebrow="How we operate"
@@ -29,6 +30,6 @@ export function Principles() {
           ))}
         </ol>
       </Reveal>
-    </section>
+    </LightBand>
   );
 }

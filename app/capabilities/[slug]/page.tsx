@@ -12,6 +12,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export function generateStaticParams() {
   return capabilities.map((c) => ({ slug: c.slug }));
@@ -108,7 +109,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
       </section>
 
       {/* ----------------------------------------------- what it actually is */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:gap-16">
             <div>
@@ -184,7 +185,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
             </div>
           </div>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* ------------------------------------------------------ what you get */}
       <section className="band-mist">
@@ -233,7 +234,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
       </section>
 
       {/* ------------------------------------------------------------ process */}
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <SectionHeading
             eyebrow="How it runs"
@@ -260,7 +261,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
             ))}
           </ol>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* -------------------------------------------------- related verticals */}
       {related.length > 0 && (

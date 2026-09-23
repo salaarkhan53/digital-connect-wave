@@ -8,6 +8,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { CTABand } from '@/components/ui/CTABand';
+import { LightBand } from '@/components/ui/LightBand';
 
 export const metadata: Metadata = {
   title: 'Compliance',
@@ -24,7 +25,7 @@ export default function CompliancePage() {
         lede="In Medicare and Final Expense, compliance is not a feature of the service. It is the service. Here is exactly how it works on our floor."
       />
 
-      <section className="band-light">
+      <LightBand>
         <Reveal className="shell section">
           <ul className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
             {complianceItems.map((item, i) => (
@@ -49,7 +50,7 @@ export default function CompliancePage() {
             ))}
           </ul>
         </Reveal>
-      </section>
+      </LightBand>
 
       {/* ----------------------------------------------- what gets reported */}
       <section className="band-mist">
