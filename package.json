@@ -11,7 +11,8 @@
     "qa:routes": "node scripts/routes.cjs",
     "qa:tour": "node scripts/tour.cjs",
     "qa:motion": "node scripts/rm-check.cjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "qa:spacing": "node scripts/spacing.cjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

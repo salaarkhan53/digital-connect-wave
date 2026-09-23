@@ -70,7 +70,7 @@ export function Footer() {
       />
       <div className="mesh-field absolute inset-0 -z-20 opacity-50" aria-hidden="true" />
 
-      <Reveal className="shell py-10 md:py-14">
+      <Reveal className="shell py-10 md:py-12">
         {/* ------------------------------------------------- contact strip */}
         <ul className="grid gap-3 sm:grid-cols-3">
           {channels.map((channel) => {

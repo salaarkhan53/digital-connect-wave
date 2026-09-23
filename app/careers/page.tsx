@@ -28,7 +28,7 @@ export default function CareersPage() {
         <Reveal className="shell section">
           <SectionHeading eyebrow="Why here" title="What you can expect from us." />
 
-          <ul className="mt-12 grid gap-8 sm:grid-cols-2">
+          <ul className="mt-9 grid gap-8 sm:grid-cols-2">
             {careersIntro.points.map((point) => (
               <li key={point.title} data-reveal>
                 <h3 className="font-display text-lg font-medium text-ink">{point.title}</h3>
@@ -49,7 +49,7 @@ export default function CareersPage() {
             lede="Apply with your CV and we will come back to you about the campaign, the shift and the numbers."
           />
 
-          <ul className="mt-12 border-t border-white/10">
+          <ul className="mt-9 border-t border-white/10">
             {roles.map((role) => (
               <li key={role.slug}>
                 <Link

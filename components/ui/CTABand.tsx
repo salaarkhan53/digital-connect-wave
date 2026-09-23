@@ -19,11 +19,11 @@ export function CTABand({
   lede?: string;
 }) {
   return (
-    <section className="border-t border-white/10 bg-void py-16 md:py-20">
+    <section className="border-t border-white/10 bg-void py-12 md:py-16">
       <Reveal className="shell">
         <div
           data-reveal
-          className="relative isolate mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/12 px-6 py-14 text-center sm:px-10 md:py-16"
+          className="relative isolate mx-auto max-w-4xl overflow-hidden rounded-3xl border border-white/12 px-6 py-12 text-center sm:px-10 md:py-14"
         >
           <Image
             src={asset('/brand/cta.webp')}

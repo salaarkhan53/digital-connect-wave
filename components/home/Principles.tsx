@@ -12,7 +12,7 @@ export function Principles() {
           lede="These are the ones that have actually cost us work. That is how you know they are real."
         />
 
-        <ol className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {principles.map((principle, i) => (
             <li key={principle.title} data-reveal className="group">
               <p

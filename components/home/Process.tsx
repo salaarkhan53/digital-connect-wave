@@ -37,7 +37,9 @@ export function Process() {
             scrollTrigger: {
               trigger: el,
               start: 'top top+=72',
-              end: () => `+=${process.length * 300}`,
+              // 220px of scroll per step. At 300 the scene held the page still
+            // long enough to read as though nothing were happening.
+            end: () => `+=${process.length * 220}`,
               pin: true,
               scrub: 0.6,
               invalidateOnRefresh: true,
@@ -74,7 +76,7 @@ export function Process() {
           lede="The order matters. Most failed campaigns skipped step one and discovered it at step four."
         />
 
-        <ol className="mt-12 space-y-4">
+        <ol className="mt-9 space-y-4">
           {process.map((step, i) => (
             <li
               key={step.id}

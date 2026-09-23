@@ -78,7 +78,7 @@ export function SavingsCalculator() {
           lede="Put your own numbers in. Nothing is sent anywhere, and nothing here is a quote. It is arithmetic you can check."
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-start">
           {/* ------------------------------------------------------ inputs */}
           <div
             data-reveal

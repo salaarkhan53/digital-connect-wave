@@ -25,7 +25,7 @@ export function PageHero({
         aria-hidden="true"
       />
 
-      <Reveal className="shell py-16 md:py-24">
+      <Reveal className="shell py-12 md:py-16">
         {breadcrumb && breadcrumb.length > 0 && (
           <nav data-reveal aria-label="Breadcrumb" className="mb-8">
             <ol className="flex flex-wrap items-center gap-1.5 text-xs text-white/55">

@@ -125,6 +125,19 @@ The scene is deliberately expensive to load, so it is fenced in:
 
 ---
 
+## Spacing
+
+`.section` carries the vertical rhythm, and `.section-tight` is for pages that
+stack many of the same block in a row, where the full rhythm reads as a series
+of gaps rather than as separation.
+
+Keep an eye on the ratio. `npm run qa:spacing` reports vertical padding as a
+percentage of page height for every page; it was 25 to 41 percent before the
+scale was halved, and sits around 13 to 26 percent now. Much past that and the
+page is mostly padding.
+
+---
+
 ## Motion
 
 All durations, easings and stagger values live in `lib/motion.ts`. Nothing is

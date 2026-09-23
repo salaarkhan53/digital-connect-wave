@@ -29,7 +29,7 @@ export function Industries() {
           lede="Nine verticals with their own objections, their own compliance load and their own idea of a good call."
         />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_22rem] lg:items-start">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_22rem] lg:items-start">
           <ul data-reveal className="border-t border-white/10">
             {industries.map((industry, i) => (
               <li key={industry.slug}>

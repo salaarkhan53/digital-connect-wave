@@ -20,7 +20,7 @@ export function Capabilities() {
           lede="Eight services, run by named teams against a documented process. Take one, or take the whole desk."
         />
 
-        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {capabilities.map((cap) => (
             <li key={cap.slug} data-reveal>
               <Link
@@ -60,7 +60,7 @@ export function Capabilities() {
           ))}
         </ul>
 
-        <div data-reveal className="mt-12">
+        <div data-reveal className="mt-9">
           <Button href="/capabilities" variant="light">
             All capabilities
           </Button>

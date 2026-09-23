@@ -60,7 +60,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <ul className="mt-16 grid gap-6 border-t border-[color:var(--color-hairline)] pt-12 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-9 grid gap-6 border-t border-[color:var(--color-hairline)] pt-12 sm:grid-cols-2 lg:grid-cols-4">
             {stats.slice(0, 4).map((stat) => (
               <li key={stat.id} data-reveal>
                 <p className="font-display text-[clamp(2rem,1.6rem+1.4vw,2.75rem)] font-semibold leading-none text-ink">
@@ -92,7 +92,7 @@ export default function AboutPage() {
             lede="Structure first, headcount second. It is slower at the start and the only thing that holds at scale."
           />
 
-          <ol className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-5">
             {timeline.map((entry) => (
               <li key={entry.year} data-reveal className="bg-void p-6">
                 <p className="font-display text-2xl font-semibold text-spark">{entry.year}</p>
@@ -115,7 +115,7 @@ export default function AboutPage() {
             lede="The order matters. Most failed campaigns skipped step one and found out at step four."
           />
 
-          <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {process.map((step, i) => (
               <li
                 key={step.id}
@@ -145,7 +145,7 @@ export default function AboutPage() {
             lede="These are the ones that have actually cost us work. That is how you know they are real."
           />
 
-          <ol className="mt-14 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {principles.map((principle, i) => (
               <li key={principle.title} data-reveal>
                 <p className="font-display text-sm font-medium tabular-nums text-blue-ink/40" aria-hidden="true">

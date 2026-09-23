@@ -26,7 +26,7 @@ export function Measured() {
           lede="Agreed at Discover, reported throughout, and shown to you whether or not the numbers flatter us."
         />
 
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
           {kpis.map((kpi, i) => (
             <li
               key={kpi.label}

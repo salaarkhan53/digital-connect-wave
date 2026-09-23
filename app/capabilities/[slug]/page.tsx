@@ -103,7 +103,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
             lede="Nothing about this service is improvised. It goes through the process every other campaign goes through."
           />
 
-          <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <ol className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {process.map((step, i) => (
               <li
                 key={step.id}
@@ -133,7 +133,7 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
               title="Verticals that lean on this."
             />
 
-            <ul className="mt-12 grid gap-4 sm:grid-cols-3">
+            <ul className="mt-9 grid gap-4 sm:grid-cols-3">
               {related.map((industry) => (
                 <li key={industry.slug} data-reveal>
                   <Link

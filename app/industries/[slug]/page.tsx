@@ -99,7 +99,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
             title="The services this vertical actually needs."
           />
 
-          <ul className="mt-12 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-9 grid gap-4 sm:grid-cols-3">
             {caps.map((cap) => (
               <li key={cap.slug} data-reveal>
                 <Link
@@ -139,7 +139,7 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
             lede="Every claim here is a practice we run, not a certification we are waving."
           />
 
-          <ul className="mt-12 grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
             {complianceItems.slice(0, 3).map((item) => (
               <li key={item.title} data-reveal className="flex gap-3.5">
                 <span

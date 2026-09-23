@@ -155,8 +155,24 @@ p {
   padding-inline: var(--gutter);
 }
 
+/*
+ * Section rhythm.
+ *
+ * This was 136px top and bottom at desktop, so two adjacent sections sat 272px
+ * apart and vertical padding alone accounted for a quarter to two-fifths of
+ * every page. Roughly halved: still clearly separated bands, far less scrolling
+ * through nothing.
+ */
 .section {
-  padding-block: clamp(4rem, 2.5rem + 7vw, 8.5rem);
+  padding-block: clamp(2.5rem, 1.6rem + 3.6vw, 5rem);
+}
+
+/*
+ * For pages that stack many of the same block in a row, where the full rhythm
+ * reads as a series of gaps rather than as separation.
+ */
+.section-tight {
+  padding-block: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
 }
 
 /* Light band on the dark page. */

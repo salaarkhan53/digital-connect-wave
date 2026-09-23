@@ -54,7 +54,7 @@ export default function CapabilitiesPage() {
           className={i % 2 === 0 ? 'band-mist' : 'band-light'}
           aria-labelledby={`${cap.slug}-heading`}
         >
-          <Reveal className="shell section scroll-mt-24">
+          <Reveal className="shell section-tight scroll-mt-24">
             <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
               <div>
                 <p

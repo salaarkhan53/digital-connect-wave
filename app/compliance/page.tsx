@@ -58,7 +58,7 @@ export default function CompliancePage() {
             lede="Compliance you cannot see is compliance you cannot rely on. These are reported whether or not the numbers flatter us."
           />
 
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {kpis.map((kpi) => (
               <li
                 key={kpi.label}
