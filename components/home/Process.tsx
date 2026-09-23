@@ -118,13 +118,15 @@ export function Process() {
       {/* ------------------------------------------------------- desktop */}
       <div ref={root} className="hidden [@media(min-width:1024px)_and_(min-height:820px)]:block">
         <div className="shell py-12">
+          {/* Wider than the default measure so the title holds one line. */}
           <SectionHeading
+            className="max-w-4xl"
             eyebrow="How we work"
             title="Five steps, every campaign, no exceptions."
             lede="The order matters. Most failed campaigns skipped step one and discovered it at step four."
           />
 
-          <div className="mt-9 grid grid-cols-[20rem_1fr] gap-16">
+          <div className="mt-9 grid grid-cols-[17rem_1fr] gap-10 xl:gap-12">
             <ol className="relative">
               <span
                 className="absolute left-[15px] top-2 h-[calc(100%-2.5rem)] w-px bg-[color:var(--color-hairline)]"
@@ -167,11 +169,11 @@ export function Process() {
               })}
             </ol>
 
-            <div className="relative min-h-[16rem] rounded-2xl border border-[color:var(--color-hairline)] bg-white">
+            <div className="relative min-h-[clamp(22rem,calc(100svh-26rem),38rem)] rounded-2xl border border-[color:var(--color-hairline)] bg-white">
               {process.map((step, i) => (
                 <div
                   key={step.id}
-                  className="absolute inset-0 flex flex-col p-8 transition-opacity duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
+                  className="absolute inset-0 flex flex-col p-7 transition-opacity duration-[620ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]"
                   style={{
                     opacity: active === i ? 1 : 0,
                     pointerEvents: active === i ? 'auto' : 'none',
@@ -198,12 +200,12 @@ export function Process() {
                        take whatever height the pinned scene has left without
                        being cropped.
                     */
-                    <div className="relative mt-5 min-h-0 flex-1">
+                    <div className="relative mt-6 min-h-0 flex-1">
                       <Image
                         src={asset(step.image)}
                         alt=""
                         fill
-                        sizes="(min-width: 1024px) 48rem, 0px"
+                        sizes="(min-width: 1024px) 60rem, 0px"
                         className="object-contain object-center"
                       />
                     </div>

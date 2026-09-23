@@ -35,7 +35,14 @@ for (const file of files) {
   }
 
   await sharp(`${SRC}/${file}`)
-    .resize({ width: 900, withoutEnlargement: true })
+    /*
+     * Trim the transparent margin first. The art sits inside a padded canvas,
+     * and `object-contain` fits the canvas, not the art: Discover wasted 31%
+     * of its box on empty pixels, so the illustration rendered a fifth smaller
+     * than the space it was given.
+     */
+    .trim({ threshold: 1 })
+    .resize({ width: 1000, withoutEnlargement: true })
     // `alphaQuality` matters more than `quality` here: the cut-out edge is
     // what would show banding against the white panel.
     .webp({ quality: 74, alphaQuality: 90, effort: 6 })
