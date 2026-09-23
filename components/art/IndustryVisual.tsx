@@ -17,12 +17,22 @@ import { asset } from '@/lib/asset';
 export function IndustryVisual({
   industry,
   index,
+  scrim = 'card',
   sizes = '(min-width: 1024px) 22rem, 100vw',
   priority = false,
 }: {
   industry: Industry;
   /** Seeds the fallback art so neighbouring panels do not look identical. */
   index: number;
+  /**
+   * How hard to darken the photograph.
+   *
+   * `card` is the default and carries a heavy bottom gradient, because on a
+   * card the industry name and summary are set over the lower half and have to
+   * stay legible. `plain` is for the places the picture stands on its own,
+   * where that much darkening just makes it look muddy.
+   */
+  scrim?: 'card' | 'plain';
   sizes?: string;
   priority?: boolean;
 }) {
@@ -43,7 +53,11 @@ export function IndustryVisual({
       {/* Sits the photograph on the brand palette and keeps any text above it
           legible, since the images vary in how bright their lower half is. */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-void via-void/35 to-void/10"
+        className={
+          scrim === 'plain'
+            ? 'absolute inset-0 bg-gradient-to-t from-void/45 via-void/10 to-transparent'
+            : 'absolute inset-0 bg-gradient-to-t from-void via-void/35 to-void/10'
+        }
         aria-hidden="true"
       />
       <div

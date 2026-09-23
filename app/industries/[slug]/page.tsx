@@ -45,37 +45,62 @@ export default async function IndustryPage(props: PageProps<'/industries/[slug]'
           { label: 'Home', href: '/' },
           { label: 'Industries', href: '/industries' },
         ]}
+        artOverlap
       />
 
+      {/*
+        No `section` padding at the top of this band: the artwork is positioned
+        against the band edge, and any padding above it would push it down and
+        break the overlap.
+      */}
       <section className="band-light">
-        <Reveal className="shell section">
-          {/*
-            The intro and the artwork sit at comparable weight. A 4:5 portrait
-            here ran past 700px tall beside a 300px block of copy, which is why
-            the text read as small: it was not, the picture was simply enormous.
-          */}
-          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
-            <div>
+        <Reveal className="shell pb-[clamp(2.5rem,1.6rem+3.6vw,5rem)]">
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
+            {/*
+              The artwork rises exactly half its own height above the band edge,
+              so it reads as half on the dark masthead and half on the white.
+              This used to sit wholly inside the white band, which left the top
+              right of the masthead empty and the left of the picture emptier.
+
+              A percentage margin resolves against the column's width, and the
+              aspect ratio fixes the height to a share of that same width, so
+              "half" holds at every size with no magic pixel value: 4:3 is 0.75w
+              tall, so half of it is 37.5% of w, and 5:4 is 0.8w, so 40%.
+
+              It is ordered first in the markup because that is the order it
+              wants below `lg`, where the columns stack; the grid places it on
+              the right from `lg` up.
+            */}
+            {/* Capped while the columns are stacked, because the percentage
+                margin is a share of this box's width: left to run the full
+                width of a tablet it would be 500px tall and rise further into
+                the masthead than there is masthead to rise into. */}
+            <div className="mx-auto w-full max-w-[26rem] lg:col-start-2 lg:row-start-1 lg:max-w-none">
+              <div
+                data-reveal
+                className="relative -mt-[37.5%] aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-void shadow-[0_34px_80px_-48px_rgb(5_7_14/0.85)] lg:-mt-[40%] lg:aspect-[5/4]"
+                aria-hidden="true"
+              >
+                <IndustryVisual
+                  industry={industry}
+                  index={index}
+                  scrim="plain"
+                  sizes="(min-width: 1024px) 34rem, 26rem"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Its own top padding rather than the grid's: `items-start` is
+                what keeps the artwork's overlap exact whatever length the
+                copy runs to, so the copy has to space itself. */}
+            <div className="lg:col-start-1 lg:row-start-1 lg:pt-12">
               <p
                 data-reveal
                 className="text-[clamp(1.0625rem,1rem+0.5vw,1.3125rem)] leading-relaxed text-ink body-justify"
               >
                 {industry.body}
               </p>
-
-            </div>
-
-            <div
-              data-reveal
-              className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--color-hairline)] bg-void lg:aspect-[5/4]"
-              aria-hidden="true"
-            >
-              <IndustryVisual
-                industry={industry}
-                index={index}
-                sizes="(min-width: 1024px) 34rem, 90vw"
-                priority
-              />
             </div>
           </div>
 

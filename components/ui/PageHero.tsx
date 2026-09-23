@@ -9,12 +9,19 @@ export function PageHero({
   title,
   lede,
   breadcrumb,
+  artOverlap = false,
   children,
 }: {
   eyebrow?: string;
   title: string;
   lede?: ReactNode;
   breadcrumb?: { label: string; href: string }[];
+  /**
+   * Leaves room at the bottom for artwork in the next band that rises into
+   * this one. Only below `lg`: from there up the art sits in its own column
+   * beside the copy, so there is nothing to clear.
+   */
+  artOverlap?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -25,10 +32,18 @@ export function PageHero({
         aria-hidden="true"
       />
 
-      <Reveal className="shell py-12 md:py-16">
+      {/*
+        `md:pb-44` repeats `pb-44` on purpose. A variant utility is emitted
+        after the unprefixed ones, so `md:py-16` would otherwise win the
+        padding-bottom back at `md` and the artwork below would land on the
+        headline.
+      */}
+      <Reveal
+        className={`shell py-12 md:py-16 ${artOverlap ? 'pb-44 md:pb-44 lg:pb-16' : ''}`}
+      >
         {breadcrumb && breadcrumb.length > 0 && (
-          <nav data-reveal aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-1.5 text-xs text-white/55">
+          <nav data-reveal aria-label="Breadcrumb" className="mb-8 w-fit max-w-full">
+            <ol className="inline-flex max-w-full flex-wrap items-center gap-1.5 text-xs text-white/55">
               {breadcrumb.map((crumb) => (
                 <li key={crumb.href} className="flex items-center gap-1.5">
                   <Link
@@ -48,16 +63,23 @@ export function PageHero({
         {eyebrow && (
           <p
             data-reveal
-            className="flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-spark/80"
+            className="inline-flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.18em] text-spark/80"
           >
             <span className="h-px w-6 bg-spark/50" aria-hidden="true" />
             {eyebrow}
           </p>
         )}
 
+        {/*
+          With art rising into this band it occupies the right-hand ~45% from
+          `lg` up, and the copy has to stop short of it: at 1024 the lede's
+          own 2xl measure ran a hundred pixels underneath the picture.
+        */}
         <h1
           data-reveal
-          className="mt-5 max-w-4xl text-[length:var(--text-h1)] font-semibold text-white"
+          className={`mt-5 max-w-4xl text-[length:var(--text-h1)] font-semibold text-white ${
+            artOverlap ? 'lg:max-w-[52%]' : ''
+          }`}
         >
           {title}
         </h1>
@@ -65,7 +87,9 @@ export function PageHero({
         {lede && (
           <p
             data-reveal
-            className="mt-6 max-w-2xl text-[length:var(--text-lede)] leading-relaxed text-white/55 body-justify"
+            className={`mt-6 max-w-2xl text-[length:var(--text-lede)] leading-relaxed text-white/55 body-justify ${
+              artOverlap ? 'lg:max-w-[52%]' : ''
+            }`}
           >
             {lede}
           </p>
