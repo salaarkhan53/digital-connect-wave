@@ -23,15 +23,12 @@ const nextConfig: NextConfig = {
     ? {
         output: 'export',
         basePath,
-        // Pages serves files from disk, so /about has to resolve to
-        // /about/index.html — without this it 404s.
         trailingSlash: true,
-        // There is no image optimizer on Pages; serve the files as they are.
         images: { unoptimized: true },
       }
-    : {}),
-  // Read by lib/asset.ts, because next/image with `unoptimized` does not
-  // prefix basePath onto src itself.
+    : {
+        output: 'standalone',
+      }),
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
 };
 
