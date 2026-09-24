@@ -7,6 +7,7 @@ import { Check, FileText, Loader2, Upload } from 'lucide-react';
 import { experienceLevels, roleBySlug, roles } from '@/content/careers';
 import { contact } from '@/content/contact';
 import { ActionButton } from '@/components/ui/Button';
+import { nameError, normalizePhone, PHONE_ERROR } from '@/lib/validate';
 
 /**
  * Job application form.
@@ -41,14 +42,6 @@ const input =
   'text-sm text-ink placeholder:text-muted/60 transition-colors duration-[160ms] ' +
   'focus:border-blue hover:border-muted/40';
 
-/** US numbers only. Accepts 10 digits, or 11 beginning with the country code. */
-function normalizeUsPhone(raw: string) {
-  const digits = raw.replace(/\D/g, '');
-  if (digits.length === 10) return `+1${digits}`;
-  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
-  return null;
-}
-
 export function ApplicationForm() {
   const params = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
@@ -74,6 +67,10 @@ export function ApplicationForm() {
     const file = data.get('attachment');
 
     if (!name) next.name = 'Please tell us your name.';
+    else {
+      const problem = nameError(name, 'Your name');
+      if (problem) next.name = problem;
+    }
     if (!email) next.email = 'We need an email to reply to.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = 'That email does not look right.';
 
@@ -89,10 +86,18 @@ export function ApplicationForm() {
     }
 
     if (!city) next.city = 'Please tell us your city.';
+    else {
+      const problem = nameError(city, 'City');
+      if (problem) next.city = problem;
+    }
     if (!state) next.state = 'Please tell us your state.';
+    else {
+      const problem = nameError(state, 'State');
+      if (problem) next.state = problem;
+    }
 
     if (!phone) next.phone = 'We need a number to reach you on.';
-    else if (!normalizeUsPhone(phone)) next.phone = 'Enter a US number, 10 digits.';
+    else if (!normalizePhone(phone)) next.phone = PHONE_ERROR;
 
     if (!experience) next.experience = 'Pick the closest band.';
 
@@ -113,7 +118,7 @@ export function ApplicationForm() {
     }
 
     // Tidy the values Web3Forms will put in the notification email.
-    const phone = normalizeUsPhone(String(data.get('phone') ?? ''));
+    const phone = normalizePhone(String(data.get('phone') ?? ''));
     if (phone) data.set('phone', phone);
     data.set('subject', `Application: ${role || 'General'} - ${data.get('name')}`);
 
@@ -254,7 +259,6 @@ export function ApplicationForm() {
           htmlFor="phone"
           required
           error={errors.phone}
-          hint="US numbers only"
         >
           <input
             id="phone"

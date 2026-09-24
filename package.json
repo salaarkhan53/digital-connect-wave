@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "qa:spacing": "node scripts/spacing.cjs",
     "process:images": "node scripts/generate-process-images.mjs",
-    "industry:images": "node scripts/generate-industry-images.mjs"
+    "industry:images": "node scripts/generate-industry-images.mjs",
+    "test:rules": "node --experimental-strip-types scripts/validate-rules.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

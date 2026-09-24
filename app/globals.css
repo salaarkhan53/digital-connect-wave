@@ -149,6 +149,19 @@ body {
   }
 }
 
+/*
+ * Tailwind v4's Preflight sets `cursor: default` on buttons, which is why the
+ * step tabs on "How we work" gave no hint that they could be clicked. Fixed
+ * once here rather than per component, so a button added later cannot miss it;
+ * layered, so a `cursor-*` utility still wins where one is wanted.
+ */
+@layer base {
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+}
+
 p {
   text-wrap: pretty;
 }

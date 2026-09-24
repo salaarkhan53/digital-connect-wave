@@ -6,6 +6,7 @@ import { Check, Loader2 } from 'lucide-react';
 import { capabilities } from '@/content/capabilities';
 import { contact } from '@/content/contact';
 import { ActionButton } from '@/components/ui/Button';
+import { nameError } from '@/lib/validate';
 
 /**
  * Enquiries go through Web3Forms to the same inbox as job applications. The
@@ -79,6 +80,10 @@ export function ContactForm() {
     const body = String(data.get('message') ?? '').trim();
 
     if (!name) next.name = 'Please tell us who you are.';
+    else {
+      const problem = nameError(name, 'Your name');
+      if (problem) next.name = problem;
+    }
     if (!email) next.email = 'We need an email to reply to.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = 'That email does not look right.';
     if (body.length < 10) next.message = 'A sentence or two about the campaign helps.';
