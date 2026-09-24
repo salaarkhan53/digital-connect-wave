@@ -3,7 +3,11 @@ deployment:
   tasks:
     - export APPDIR=/home/selectfi/digital-connect-wave
     - cd $APPDIR
-    - /home/selectfi/nodevenv/digital-connect-wave/24/bin/npm ci
+    # --include=dev, because the build needs them. cPanel's Node app manager
+    # sets NODE_ENV=production, and a plain `npm ci` under that drops 330
+    # packages including typescript, tailwindcss and @tailwindcss/postcss --
+    # all of which `next build` needs, so the deploy fails at the build step.
+    - /home/selectfi/nodevenv/digital-connect-wave/24/bin/npm ci --include=dev
     - /home/selectfi/nodevenv/digital-connect-wave/24/bin/npm run build
     - mkdir -p $APPDIR/tmp
     - touch $APPDIR/tmp/restart.txt

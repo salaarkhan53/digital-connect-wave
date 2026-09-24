@@ -9,11 +9,17 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   /*
-   * With a trailing slash. The Pages build sets `trailingSlash: true`, so every
-   * URL listed without one answered 301 and the whole sitemap pointed at
-   * redirects.
+   * The trailing slash has to follow whatever the build is doing, because the
+   * two targets disagree and the wrong choice makes every URL here a redirect.
+   *
+   * The Pages build sets `trailingSlash: true`, so /about answers 301 and
+   * /about/ is canonical. A Node host runs the default, where /about is
+   * canonical and /about/ answers 308. Same flag as next.config.ts, so the
+   * sitemap cannot drift from the routing.
    */
-  const url = (path: string) => `${site.url}${path === '/' ? '/' : `${path}/`}`;
+  const slash = process.env.GITHUB_PAGES === 'true';
+  const url = (path: string) =>
+    `${site.url}${path === '/' ? '/' : slash ? `${path}/` : path}`;
 
   const staticRoutes = [
     { path: '/', priority: 1 },
