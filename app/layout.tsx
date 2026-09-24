@@ -10,6 +10,18 @@ import './globals.css';
 /** True for the GitHub Pages review build. */
 const isPreview = process.env.NEXT_PUBLIC_PREVIEW === 'true';
 
+/*
+ * The card every share of this site renders with. `summary_large_image` was
+ * already declared without one, which is the worst of both worlds: the large
+ * format reserved and nothing to put in it, so links previewed as a blank box.
+ *
+ * A file rather than a generated route, because `output: 'export'` has no
+ * server to run ImageResponse on. `asset()` is not used here: Open Graph
+ * consumers need an absolute URL, which `metadataBase` supplies, and the base
+ * path is already part of it.
+ */
+const OG_IMAGE = '/brand/og.png';
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -17,6 +29,13 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  /*
+   * Resolved per route against `metadataBase`, so every page declares itself
+   * canonical rather than leaving search engines to guess. Without this the
+   * trailing-slash and query-string variants of a page all looked like
+   * separate URLs with the same content.
+   */
+  alternates: { canonical: './' },
   openGraph: {
     type: 'website',
     siteName: site.name,
@@ -24,11 +43,13 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
     locale: 'en_US',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: `${site.name} — ${site.tagline}` }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
+    images: [OG_IMAGE],
   },
   /*
    * A review deployment is a work in progress carrying figures that are not

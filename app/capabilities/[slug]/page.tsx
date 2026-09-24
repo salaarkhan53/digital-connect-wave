@@ -58,7 +58,8 @@ export default async function CapabilityPage(props: PageProps<'/capabilities/[sl
                   <li key={crumb.href} className="flex items-center gap-1.5">
                     <Link
                       href={crumb.href}
-                      className="transition-colors duration-[160ms] hover:text-spark"
+                      // py-1 takes the link from 16px to the 24px minimum target size.
+                      className="inline-block py-1 transition-colors duration-[160ms] hover:text-spark"
                     >
                       {crumb.label}
                     </Link>

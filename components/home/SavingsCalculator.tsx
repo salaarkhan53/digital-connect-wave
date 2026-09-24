@@ -106,7 +106,9 @@ export function SavingsCalculator() {
                         step={bounds.step}
                         value={value}
                         onChange={(e) => set(field.key)(Number(e.target.value))}
-                        className="h-2 flex-1 cursor-pointer appearance-none rounded-full bg-[color:var(--color-hairline)] accent-[color:var(--color-blue)]"
+                        // Height, track and thumb come from the base rule in globals.css, which
+                        // gives the element a 24px hit area without thickening the track.
+                        className="flex-1 appearance-none bg-transparent"
                       />
                       <input
                         type="number"

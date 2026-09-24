@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, cloneElement, isValidElement } from 'react';
 import { Check, Loader2 } from 'lucide-react';
 import { capabilities } from '@/content/capabilities';
 import { contact } from '@/content/contact';
@@ -289,10 +289,22 @@ function Field({
         )}
       </label>
       {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
-      {children}
+      {/*
+        The control is cloned so the error can be wired to it. `role="alert"`
+        announces the message once when it appears, but a screen reader user
+        who tabs back to the field afterwards got nothing: no invalid state and
+        no way to reach the text. `aria-invalid` and `aria-describedby` fix
+        both, and the id is derived from the field name so it stays unique.
+      */}
+      {isValidElement(children)
+        ? cloneElement(children as React.ReactElement<Record<string, unknown>>, {
+            'aria-invalid': error ? true : undefined,
+            'aria-describedby': error ? `${name}-error` : undefined,
+          })
+        : children}
       {/* Errors sit beside the field they belong to, not in a summary at the top. */}
       {error && (
-        <p className="mt-2 text-xs font-medium text-red-600" role="alert">
+        <p id={`${name}-error`} className="mt-2 text-xs font-medium text-red-600" role="alert">
           {error}
         </p>
       )}

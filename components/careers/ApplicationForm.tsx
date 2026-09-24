@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRef, useState, cloneElement, isValidElement } from 'react';
 import { Check, FileText, Loader2, Upload } from 'lucide-react';
 import { experienceLevels, roleBySlug, roles } from '@/content/careers';
 import { contact } from '@/content/contact';
@@ -436,9 +436,21 @@ function Labelled({
         {optional && <span className="ml-1.5 font-normal text-muted">(optional)</span>}
       </label>
       {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
-      {children}
+      {/*
+        The control is cloned so the error can be wired to it. `role="alert"`
+        announces the message once when it appears, but a screen reader user
+        who tabs back to the field afterwards got nothing: no invalid state and
+        no way to reach the text. `aria-invalid` and `aria-describedby` fix
+        both, keyed off the id the label already points at.
+      */}
+      {isValidElement(children)
+        ? cloneElement(children as React.ReactElement<Record<string, unknown>>, {
+            'aria-invalid': error ? true : undefined,
+            'aria-describedby': error ? `${htmlFor}-error` : undefined,
+          })
+        : children}
       {error && (
-        <p className="mt-2 text-xs font-medium text-red-600" role="alert">
+        <p id={`${htmlFor}-error`} className="mt-2 text-xs font-medium text-red-600" role="alert">
           {error}
         </p>
       )}

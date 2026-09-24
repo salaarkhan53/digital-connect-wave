@@ -8,7 +8,12 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const url = (path: string) => `${site.url}${path}`;
+  /*
+   * With a trailing slash. The Pages build sets `trailingSlash: true`, so every
+   * URL listed without one answered 301 and the whole sitemap pointed at
+   * redirects.
+   */
+  const url = (path: string) => `${site.url}${path === '/' ? '/' : `${path}/`}`;
 
   const staticRoutes = [
     { path: '/', priority: 1 },
@@ -17,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/compliance', priority: 0.8 },
     { path: '/about', priority: 0.7 },
     { path: '/careers', priority: 0.6 },
+    { path: '/careers/apply', priority: 0.5 },
     { path: '/contact', priority: 0.8 },
   ];
 

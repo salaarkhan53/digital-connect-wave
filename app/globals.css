@@ -296,6 +296,55 @@ p {
   }
 }
 
+/*
+ * Range sliders: an 8px track is the look, but it was also the whole hit area,
+ * so the calculator's sliders were an 8px-tall strip to grab. The element is
+ * 24px now, which is the minimum target size, with the track painted on its
+ * pseudo-element so nothing about the appearance changes.
+ *
+ * Both vendor prefixes, and the thumb is styled explicitly: `appearance-none`
+ * stops `accent-color` applying, so without this the handle would disappear.
+ */
+input[type='range'] {
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-hairline);
+}
+
+input[type='range']::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-hairline);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.125rem;
+  width: 1.125rem;
+  border-radius: 9999px;
+  background: var(--color-blue);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(11 18 32 / 0.3);
+  /* Centres the thumb on a track that is thinner than it is. */
+  margin-top: -0.3125rem;
+}
+
+input[type='range']::-moz-range-thumb {
+  height: 1.125rem;
+  width: 1.125rem;
+  border-radius: 9999px;
+  background: var(--color-blue);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(11 18 32 / 0.3);
+}
+
 /* Hairline that fades at both ends — used between dark sections. */
 .rule-fade {
   height: 1px;
