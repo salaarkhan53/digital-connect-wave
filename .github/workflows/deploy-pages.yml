@@ -1,69 +1,50 @@
-name: Deploy to GitHub Pages
+name: Deploy Digital Connect Wave
 
 on:
   push:
-    branches: [master]
-  # So a rebuild can be triggered without pushing a commit.
+    branches:
+      - master
   workflow_dispatch:
 
-# Pages needs to read the repo and mint an id-token to deploy.
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Let a running deploy finish rather than cancelling it mid-publish, but only
-# keep one queued behind it.
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  build:
+  deploy:
+    name: Build and Deploy Website
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
-      - name: Install
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build static export
+      - name: Build Next.js application
         env:
-          # Switches next.config.ts to `output: 'export'` with the repo basePath.
-          GITHUB_PAGES: 'true'
-          # This is a review build: noindex everywhere, and the canonical URLs
-          # point at Pages rather than claiming to be the production domain.
-          NEXT_PUBLIC_PREVIEW: 'true'
-          NEXT_PUBLIC_SITE_URL: https://salaarkhan53.github.io/digital-connect-wave
-          # Web3Forms access key for the careers application form. Set it as a
-          # repository secret named WEB3FORMS_KEY. Until it exists the form says
-          # so plainly rather than pretending to submit. The key is a public
-          # identifier by design, which is why NEXT_PUBLIC_ is correct here.
-          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+          NEXT_PUBLIC_SITE_URL: https://digitalconnectwave.com
         run: npm run build
 
-      - name: Disable Jekyll
-        # Without this, Pages ignores every directory starting with an
-        # underscore — which is all of Next.js's _next assets.
-        run: touch ./out/.nojekyll
+      - name: Prepare standalone deployment
+        run: |
+          cp -r public .next/standalone/public
+          mkdir -p .next/standalone/.next/static
+          cp -r .next/static/. .next/standalone/.next/static/
+          mkdir -p .next/standalone/tmp
+          touch .next/standalone/tmp/restart.txt
 
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v3
+      - name: Deploy to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          path: ./out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./.next/standalone/
+          server-dir: ./
+          dangerous-clean-slate: true
