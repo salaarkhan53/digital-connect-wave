@@ -27,6 +27,7 @@ jobs:
       - name: Build Next.js application
         env:
           NEXT_PUBLIC_SITE_URL: https://digitalconnectwave.com
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
         run: npm run build
 
       - name: Prepare standalone deployment
