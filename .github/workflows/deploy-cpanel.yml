@@ -48,4 +48,19 @@ jobs:
           port: 21
           local-dir: ./.next/standalone/
           server-dir: ./
-          dangerous-clean-slate: true
+          # Incremental, not a clean slate on every push.
+          #
+          # A standalone build is 1,600 files, 1,109 of them node_modules, and
+          # `dangerous-clean-slate` deletes the lot and re-sends all of it
+          # every time. Four of the first six deploys died partway through that
+          # -- once on a rejected filename, once with the server closing the
+          # connection -- because it is a very long single FTP session.
+          #
+          # Without it the action keeps a manifest on the server and sends only
+          # what changed, which is a handful of files per push. The action's own
+          # guidance is to use clean-slate once and then drop it, which the
+          # successful run has now done.
+          #
+          # If the server ever needs wiping again, set it back to true for one
+          # run and remove it after.
+          state-name: .ftp-deploy-state.json
