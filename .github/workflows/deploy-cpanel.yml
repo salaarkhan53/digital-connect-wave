@@ -38,6 +38,11 @@ jobs:
           mkdir -p .next/standalone/tmp
           touch .next/standalone/tmp/restart.txt
 
+          echo "=== Standalone server.js ==="
+          ls -lh .next/standalone/server.js
+          echo "=== First lines ==="
+          head -20 .next/standalone/server.js
+
       - name: Deploy to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
