@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export APPDIR=/home/selectfi/digital-connect-wave
+    - cd $APPDIR
+    - /home/selectfi/nodevenv/digital-connect-wave/24/bin/npm ci
+    - /home/selectfi/nodevenv/digital-connect-wave/24/bin/npm run build
+    - mkdir -p $APPDIR/tmp
+    - touch $APPDIR/tmp/restart.txt
